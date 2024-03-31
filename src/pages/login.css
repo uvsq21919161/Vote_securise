@@ -1,0 +1,65 @@
+.flex-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    background-image: url('src/assets/Login.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.divleft.divs {
+    flex: 13;
+    display : flex;
+    align-items: center;
+    gap : 10%
+    /*background-color: yellow;*/
+}
+
+.divright.divs {
+    flex: 7;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap : 3em;
+    background-color: #BECDEA;
+}
+
+.image_illustration{
+    width: 100%;
+}
+
+.entete_droite {
+    margin-top: 13%;
+    font: inter;
+    font-size: 2.1em;
+    text-align: center;
+    color : #000A3C;
+    width: 90%;
+
+}
+
+p {
+    text-align: center;
+    color: #000A3C;
+}
+
+.info {
+    width: 62%;
+    line-height: 1.20em;
+}
+
+.little{
+    font-size: 1.051em;
+}
+
+.big {
+    font-size: 1.27em;
+}
+
+.nav {
+    margin-bottom: 23px;
+    font-size: 1.120em;
+    height: 100vh;
+    display: flex;
+    align-items: flex-end;
+}
