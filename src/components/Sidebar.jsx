@@ -12,7 +12,7 @@ function Sidebar() {
   };
 
   const styleSidebar = {
-    width: isSideBarExpanded ? "220px" : "50px",
+    width: isSideBarExpanded ? "350px" : "50px",
     transition: "width 0.2s",
   };
 

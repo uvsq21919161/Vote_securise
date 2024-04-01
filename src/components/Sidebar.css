@@ -5,28 +5,26 @@
   flex-direction: column;
   background-color: #18253a;
   height: 100vh;
-  border-top-right-radius: 30px;
-  border-bottom-right-radius: 30px;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
 }
 
 .logosidebar {
-  margin: 30px;
+  margin: 3.25rem;
   width: 50%;
   height: auto;
   align-self: center;
 }
 .menu-item {
-  padding-top: 10px;
-  padding-bottom: 12px;
-  margin-left: 10px;
+  padding: 20px 0 20px 15px;
   cursor: pointer;
 }
 
 .item {
   color: #98b3e1;
   font-family: "Inter", sans-serif;
-  font-size: 0.9rem;
-  margin-left: 10px;
+  font-size: 1.15rem;
+  margin-left: 10px;;
 }
 
 .item:hover {
@@ -42,16 +40,12 @@
 }
 
 .selecteditem {
-  border-block: 2px solid #98b3e1;
+  border-width: 2px 0;
+  border-style: solid; 
+  border-color: #98b3e1;
 }
 
-hr {
-  background-color: #98b3e1;
-  height: 2px;
-  border: none;
-  margin-bottom: 10px;
-}
 .menu {
+  margin-top: 1rem;
   list-style-type: none;
-  gap: 10%;
 }

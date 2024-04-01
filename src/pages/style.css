@@ -4,12 +4,84 @@
 }
 
 .title{
-    margin: 20px;
-    font-size: 2.2rem;
+    margin: 30px;
+    font-size: 2.8rem;
     font-family: 'Inter';
 }
 
 .headinfo{
-    margin: 20px;
+    margin: 30px;
     font-family: 'Inter';
+    font-size: 1.3rem;
+}
+
+.flexcontainer {
+    display: flex;
+}
+
+.page {
+    width: 100%;
+}
+
+.candidats {
+    flex: 6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.containerbulletin {
+    flex: 2;
+}
+
+.slot {
+    width: calc(100% - 30px);
+    margin-left: 30px;
+}
+
+.candidat {
+    font-family: 'Inter';
+    font-size: 1.3rem;
+    background-color: #A4B5D7;
+    padding: 40px 30px 40px 30px;
+    border: 1px solid #809BCE;
+    border-radius: 20px;
+    margin-bottom: 25px;
+}
+
+.candidatname {
+    font-weight: 600;
+}
+
+.bulletin {
+    background-color: #E7EEFA;
+    padding: 30px;
+    margin: 30px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 30px;
+}
+
+.headerbulletin {
+    text-align: center;
+    font-family: 'Inter';
+    margin-bottom: 20px;
+}
+
+.bodybulletin {
+    text-align: center;
+    font-family: 'Inter';
+    margin-bottom: 20px;
+}
+
+.button {
+    background-color: #517AC1;
+    font-family: 'Inter';
+    font-size: 1rem;
+    text-align: center;
+    color: #ffffff;
+    border: none;
+    border-radius: 1rem;
+    padding: 1rem;
+    cursor: pointer;
 }

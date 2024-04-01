@@ -39,7 +39,6 @@
 }
 
 p {
-    text-align: center;
     color: #000A3C;
 }
 
@@ -62,4 +61,10 @@ p {
     height: 100vh;
     display: flex;
     align-items: flex-end;
+}
+
+.calque {
+    background-image: url("../assets/election.png");
+    background-size: cover;
+    background-position: center;
 }
