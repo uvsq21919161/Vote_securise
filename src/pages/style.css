@@ -1,37 +1,39 @@
 .container{
     display: flex;
+    min-height: 100vh;
     background-color: #BECDEA;
-}
-
-.title{
-    margin: 30px;
-    font-size: 2.8rem;
-    font-family: 'Inter';
-}
-
-.headinfo{
-    margin: 30px;
-    font-family: 'Inter';
-    font-size: 1.3rem;
-}
-
-.flexcontainer {
-    display: flex;
 }
 
 .page {
     width: 100%;
 }
 
+.title{
+    margin: 30px;
+    font-size: 38px;
+    font-family: 'Inter';
+}
+
+.headinfo{
+    margin: 30px;
+    font-family: 'Inter';
+    font-size: 18px;
+}
+
+.flexcontainer {
+    display: flex;
+}
+
 .candidats {
-    flex: 6;
+    flex: 7;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 .containerbulletin {
-    flex: 2;
+    flex: 3;
+    max-width: 450px;
 }
 
 .slot {
@@ -56,14 +58,26 @@
 .bulletin {
     background-color: #E7EEFA;
     padding: 30px;
-    margin: 30px;
+    margin: 0 30px 0 30px;
     display: flex;
     flex-direction: column;
     border-radius: 30px;
+    min-width: 200px;
 }
 
 .headerbulletin {
-    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.imagebulletin {
+    background-image: url("src/assets/icon/bulletin.png");
+    background-repeat: no-repeat;
+    height: 25px;
+    width: 25px;
+}
+
+.headerbulletintext {
     font-family: 'Inter';
     margin-bottom: 20px;
 }

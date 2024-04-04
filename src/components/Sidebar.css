@@ -1,12 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
 
 .sidebarcontainer {
+  position: fixed;
   display: flex;
   flex-direction: column;
   background-color: #18253a;
   height: 100vh;
-  border-top-right-radius: 50px;
-  border-bottom-right-radius: 50px;
 }
 
 .logosidebar {
@@ -18,13 +17,25 @@
 .menu-item {
   padding: 20px 0 20px 15px;
   cursor: pointer;
+  border-width: 2px 0;
+  border-style: solid; 
+  border-color: transparent;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+  overflow: hidden;
+  display: flex;
+}
+
+.icon {
+  height: 26px;
 }
 
 .item {
   color: #98b3e1;
   font-family: "Inter", sans-serif;
-  font-size: 1.15rem;
-  margin-left: 10px;;
+  font-size: 18px;
+  margin-left: 10px;
+  align-self: center;
 }
 
 .item:hover {
@@ -48,4 +59,24 @@
 .menu {
   margin-top: 1rem;
   list-style-type: none;
+}
+
+.buttonsidebar {
+  position: fixed;
+  background-color: #18253a;
+  border: none;
+  border-radius: 0 20px 20px 0px;
+  cursor: pointer;
+  top: 40vh;
+  width: 25px;
+  height: 60px;
+  display: flex;
+  place-items: center;
+  font-family: 'Inter';
+  font-size: 30px;
+}
+
+.arrow {
+  translate: 1px -2px;
+  color : #98B3E1;
 }
