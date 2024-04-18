@@ -7,6 +7,7 @@ import MenuList from './components/MenuList';
 import {Routes, Route} from 'react-router-dom'
 import { SidebarProvider } from './components/Sidebarprovider';
 import Sidebar from './components/Sidebar';
+import Guide from './pages/guide';
 
 
 // const { Header, Sider } = Layout;
@@ -23,7 +24,7 @@ function App() {
       {/* <Login /> */}
       <SidebarProvider>
         <Sidebar />
-        <Election />
+        <Guide />
       </SidebarProvider>
     </>
   )

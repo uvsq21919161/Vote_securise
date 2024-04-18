@@ -1,0 +1,232 @@
+.container{
+    display: flex;
+    min-height: 100vh;
+    background-color: #BECDEA;
+}
+
+.page {
+    width: 100%;
+}
+
+.title{
+    margin: 30px;
+    font-size: 38px;
+    font-family: 'Inter';
+}
+
+.headinfo{
+    margin: 30px;
+    font-family: 'Inter';
+    font-size: 18px;
+}
+
+.flexcontainer {
+    display: flex;
+}
+
+.plan {
+    font-weight: bold;
+    font-family: 'Inter';
+    font-size: 26px;
+}
+
+.plancontainer {
+    margin-left: 60px;
+    list-style-type: upper-roman;
+}
+
+.chapitre {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.point {
+    font-style: normal;
+}
+
+.partiecontainer {
+    margin-left: 30px;
+    list-style-type: decimal;
+}
+
+.chaptitre {
+    margin: 30px;
+    font-size: 38px;
+    font-family: 'Inter';
+    font-weight: bold;
+}
+
+.partietitre {
+    margin-left: 80px;
+    font-size: 28px;
+    font-family: 'Inter';
+    font-weight: normal;
+    text-decoration: underline;
+}
+
+.chapitre:hover {
+    color: #186ca0;
+}
+
+.point:hover {
+    color: #186ca0;
+}
+
+.paragrapheChap {
+    margin-left: 50px;
+    font-size: 18px;
+    font-family: 'Inter';
+}
+
+.paragraphePoint {
+    margin-left: 100px;
+    font-size: 18px;
+    font-family: 'Inter';
+}
+
+.enumeration {
+    margin: 10px;
+    margin-left: 50px;
+    font-size: 18px;
+    font-family: 'Inter';
+}
+
+.imgLogin {
+    background-image: url(/src/assets/guide/imgLogin.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+    margin-left: 150px;
+    height: 100vh;
+    width: 60%;
+    border: #252d63;
+    border-style: solid;
+    border-radius: 20px;
+    border-width: 2px;
+}
+
+.imgTableau {
+    background-image: url(/src/assets/guide/imgTableau.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+    margin-left: 100px;
+    height: 85vh;
+    width: 80%;
+    border: #252d63;
+    border-style: solid;
+    border-radius: 20px;
+    border-width: 2px;
+}
+
+.imgElection1 {
+    background-image: url(/src/assets/guide/imgElection1.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+    margin-left: 250px;
+    height: 60vh;
+    width: 53%;
+    border: #252d63;
+    border-style: solid;
+    border-radius: 40px;
+    border-width: 2px;
+}
+
+.imgVisuUrne {
+    background-image: url(/src/assets/guide/imgVisuUrne.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+    margin-left: 100px;
+    height: 85vh;
+    width: 80%;
+    border: #252d63;
+    border-style: solid;
+    border-radius: 30px;
+    border-width: 2px;
+}
+
+.imgResultats {
+    background-image: url(/src/assets/guide/imgResultats.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+    margin-left: 100px;
+    height: 85vh;
+    width: 80%;
+    border: #252d63;
+    border-style: solid;
+    border-radius: 30px;
+    border-width: 2px;
+}
+
+.imgBureau {
+    background-image: url(/src/assets/guide/imgBureau.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+    margin-left: 100px;
+    height: 85vh;
+    width: 80%;
+    border: #252d63;
+    border-style: solid;
+    border-radius: 30px;
+    border-width: 2px;
+}
+
+.imgElections {
+    background-image: url(/src/assets/guide/imgElections.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+    margin-left: 100px;
+    height: 85vh;
+    width: 80%;
+    border: #252d63;
+    border-style: solid;
+    border-radius: 30px;
+    border-width: 2px;
+}
+
+.imgListeCandidats {
+    background-image: url(/src/assets/guide/imgListeCandidats.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+    margin-left: 100px;
+    height: 110vh;
+    width: 80%;
+    border: #252d63;
+    border-style: solid;
+    border-radius: 30px;
+    border-width: 2px;
+}
+
+.imgValidation {
+    background-image: url(/src/assets/guide/imgValidation.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+    margin-left: 100px;
+    height: 85vh;
+    width: 80%;
+    border: #252d63;
+    border-style: solid;
+    border-radius: 30px;
+    border-width: 2px;
+}
+
+.imgRecepisse {
+    background-image: url(/src/assets/guide/imgRecepisse.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+    margin-left: 100px;
+    height: 85vh;
+    width: 80%;
+    border: #252d63;
+    border-style: solid;
+    border-radius: 30px;
+    border-width: 2px;
+}
