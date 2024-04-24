@@ -1,0 +1,802 @@
+.App {
+  background-color: #becdea;
+  width: 100%; /* Largeur à 100% */
+  height: 100vh; /* Hauteur à 100vh */
+  background-color: #becdea;
+  position: fixed;
+  overflow-y: auto; /* Permet le défilement si le contenu dépasse la hauteur de la fenêtre */
+}
+
+.All {
+  /* cd background-color: aqua; */
+  
+  width: 82%;
+  height: 100%;
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.App-header {
+  /* background-color: greenyellow; */
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  width: 80%;
+  height: 15%;
+}
+
+.Titre {
+  /* Tableau de bord */
+  width: 412px;
+  height: 77px;
+
+  color: #00093b;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 48px;
+  line-height: 20px;
+  margin-left: 20px;
+}
+
+.Bienvenue {
+  /* Bienvenue dans votre espace de vote en ligne. */
+
+  width: 440px;
+  height: 24px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  color: #000a3c;
+  margin-left: 20px;
+}
+
+.Container {
+  /* Container */
+  /* background-color: red; */
+  position: absolute;
+  right: 0%;
+  bottom: 0%;
+  height: 83%;
+  width: 81.82%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: left;
+}
+
+.notification {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  box-sizing: border-box;
+  max-width: 1100px;
+  min-width: 600px;
+  margin-right: 30px;
+  width: auto;
+  height: 116px;
+  position: relative;
+  margin-left: 20px;
+}
+
+.Rect1 {
+  /* Bloc bulletin enregistré */
+
+  margin-top: 3px;
+  margin-left: 20px;
+  background: rgba(71, 113, 187, 0.46);
+  border: 1px solid #35435f;
+  border-radius: 25px;
+  padding-left: 20px;
+}
+
+.Rect2 {
+  /* Bloc bulletin enregistré */
+
+  margin-top: 10px;
+
+  background: rgba(126, 161, 221, 0.46);
+  border: 1px solid #4c5c7a;
+  border-radius: 25px;
+  padding-left: 20px;
+}
+
+.Texte1_rect1 {
+  /* Votre bulletin a bien été enregistré. Votre récépissé de vote a été envoyé à monadressemail@gmail.com. */
+  margin-left: 20px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  color: #35435f;
+}
+
+.Texte2_rect1 {
+  /* Votre bulletin a bien été enregistré. Votre récépissé de vote a été envoyé à monadressemail@gmail.com. */
+
+  margin-left: 20px;
+  margin-top: -8px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  color: #35435f;
+}
+
+.Texte {
+  /* Vous n’avez plus de vote à exprimer, vous pouvez vous déconnecter. */
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  white-space: nowrap;
+  color: #4c5c7a;
+}
+
+@media (max-height: 760px) {
+  .App-header {
+    height: 20%; /* Réduit la hauteur de l'en-tête */
+    margin-bottom: auto;
+  }
+
+  .Titre {
+    font-size: 36px;
+    line-height: 40px;
+  }
+
+  .Bienvenue {
+    margin-top: -20px;
+  }
+
+  .notification {
+    padding: 10px;
+    height: auto;
+  }
+
+  .Rect1,
+  .Rect2 {
+    height: auto;
+    max-height: 90px;
+  }
+
+  .urneTitre {
+    padding: 20px;
+    height: auto;
+  }
+}
+
+.BigRect {
+  /* Rectangle 35 */
+
+  position: relative;
+  width: 650px;
+  height: 400px;
+  background: #e7eefa;
+  border-radius: 50px;
+  padding: 20px;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.Deco {
+  /* Décoration */
+  position: absolute;
+  top: -141px;
+  right: -141px;
+}
+
+.TexteBigRect {
+  /* Élection du représentant du groupe */
+
+  width: 472px;
+  height: 86px;
+  margin-top: 3px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 32px;
+  line-height: 39px;
+  color: #00093b;
+}
+
+.TexteTourUnique {
+  /* Tour unique  */
+
+  width: 293px;
+  height: 54px;
+  margin-top: -27px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+
+  color: #00093b;
+}
+
+.TexteDate {
+  /*13 mai 2024, 08:00 > 24 mai 2024, 17:00 */
+
+  width: 293px;
+  height: 54px;
+  margin-top: -45px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 17px;
+  color: #00093b;
+}
+
+.line {
+  /* line de séparation */
+  margin-top: -25px;
+  margin-bottom: 12px;
+  width: 570px;
+  border: 1px solid #a1b9e5;
+}
+
+.Features {
+  /* Features */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.TexteFeatures {
+  display: flex;
+  align-items: center;
+  flex-basis: 50%;
+}
+
+.TexteFeatures img {
+  margin-right: 10px;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.BouttonEnregister {
+  /* Bouton */
+  width: 220px;
+  height: 90px;
+
+  background: #517ac1;
+  border-radius: 20px;
+  border: none;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 24px;
+
+  color: #ffffff;
+}
+
+.BouttonResultat {
+  /* Bouton Resultat*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 192px;
+  height: 72px;
+  margin-right: 50px;
+  margin-top: 10px;
+
+  background: #517ac1;
+  border-radius: 20px;
+  border: none;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  color: #ffffff;
+}
+
+.BouttonResultat img {
+  margin-right: 10px;
+}
+
+.popup {
+  /* Popup Resultat */
+  position: fixed;
+  width: 1330px;
+  height: 700px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: #e7eefa;
+  border-radius: 50px;
+}
+
+.FermerRes {
+  /* Fermer */
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 55px;
+  height: 40px;
+  font-size: 15px;
+  background: #517ac1;
+  border-radius: 10px;
+  border: none;
+}
+
+.headRes {
+  /* Résultat */
+
+  width: 96%;
+  height: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  margin-left: 50px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 32px;
+  line-height: 39px;
+
+  color: #00093b;
+}
+
+.headRes img {
+  margin-right: 10px;
+}
+
+.lineSep {
+  /* line de séparation */
+  width: 1250px;
+  margin-top: 90px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  border: 1px solid #a1b9e5;
+}
+
+.borderRes {
+  /* Rectangle 36 */
+  box-sizing: border-box;
+  width: 1200px;
+  height: 550px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15px;
+  margin-left: auto;
+  margin-right: auto;
+
+  border: 3px solid #a1b9e5;
+  border-radius: 25px;
+}
+
+.urneTitre {
+  /* Vous pouvez vérifier qu’un bulletin est bien dans l’urne en indiquant l’empreinte: */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+  width: 760px;
+  height: 22.85px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+
+  color: #00093b;
+}
+
+.urneTborderResitre img {
+  margin-right: 10px;
+}
+
+.inputContainer {
+  display: flex;
+  align-items: stretch;
+  gap: 0px;
+}
+
+.inputContainer input {
+  outline: none;
+  box-sizing: border-box;
+  width: 300px;
+  height: 40px;
+  margin-bottom: 20px;
+
+  border: 3px solid #a1b9e5;
+  border-radius: 0px 10px 10px 0px;
+}
+.inputContainer label {
+  box-sizing: border-box;
+  height: 40px;
+  border: 3px solid #a1b9e5;
+  border-right: none;
+  border-radius: 10px 0px 0px 10px;
+  padding: 7px;
+}
+
+.bouttonVerifier {
+  margin-bottom: 2%;
+  width: 324px;
+  height: 54.64px;
+  border: none;
+  background: #517ac1;
+  border-radius: 20px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  text-align: center;
+
+  color: #ffffff;
+}
+
+.popupEmpreinte {
+  box-sizing: border-box;
+  margin-bottom: 3%;
+  width: 1112px;
+  height: 116px;
+
+  background: #b7cbed;
+  border: 3px solid #4c5c7a;
+  border-radius: 15px;
+}
+
+@media (max-width: 1330px) {
+  .popupEmpreinte {
+    width: 90%;
+    height: 100%;
+    transform: none;
+  }
+}
+
+br {
+  display: block;
+  content: "";
+  margin-top: 13px;
+}
+.TexteEmpreinte {
+  /* Élection du représentant du groupe - Tour unique : Cette empreinte correspond à une entrée dans la liste d’émargement (et non pas à une empreinte de bulletin), le vote de PIRABAKARAN Thanushan a bien été enregistré le 12/03/2024 à 10h32. */
+
+  margin-top: 10px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 24px;
+  text-align: center;
+  color: #00093b;
+  padding: 0 10px;
+
+}
+
+.borderMembre {
+  /* Rectangle 36 */
+  box-sizing: border-box;
+  width: 1200px;
+  height: 550px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-top: 15px;
+  margin-left: auto;
+  margin-right: auto;
+
+  border: 3px solid #a1b9e5;
+  border-radius: 25px;
+}
+
+.headMembre {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 25px;
+  width: 316px;
+  height: 23px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  color: #00093b;
+}
+
+.headMembre img {
+  margin-right: 10px;
+}
+.tableMembre {
+  width: 1000px; /* Largeur spécifique du tableau */
+  height: 440px;
+  list-style: none;
+  padding: 0;
+  margin: 0 auto; /* Centrage horizontal */
+  border: 3px solid #a1b9e5;
+  border-radius: 25px;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.tableMembre li {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 10px;
+  border-bottom: 3px solid #a1b9e5;
+  min-height: 20px;
+}
+
+.tableMembre.long-list li:last-child:not(.special) {
+  border-bottom: none;
+}
+
+
+
+.rightText {
+  position: relative;
+  border-bottom: none;
+
+  text-align: center;
+
+  box-sizing: border-box;
+  width: 260px;
+  border: 3px solid #a1b9e5;
+  border-radius: 10px;
+}
+
+.nameStyle {
+  width: 316px;
+  height: 23px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  color: #00093b;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 999;
+}
+
+.nameCandidat,
+.caracText {
+  width: 496px;
+  height: 23px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  white-space: nowrap;
+  color: #000a3c;
+}
+
+.caracText {
+  margin-right: 800px;
+}
+.nameCandidat {
+  margin-right: 10px;
+  font-weight: 500;
+}
+
+.recepisseTitre {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 25px;
+  width: 760px;
+  height: 22.85px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+
+  color: #00093b;
+}
+
+.inputContainer p {
+  position: relative;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 300px;
+  height: 40px;
+  top: -16px;
+
+  border: 3px solid #a1b9e5;
+  border-radius: 0px 10px 10px 0px;
+}
+
+.borderResultat {
+  /* Rectangle 36 */
+  box-sizing: border-box;
+  width: 1200px;
+  height: 550px;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  margin-top: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
+
+  border: 3px solid #a1b9e5;
+  border-radius: 25px;
+}
+
+.tableauRes {
+  width: 50%;
+  height: auto;
+  margin-left: 35px;
+  margin-top: -50px;
+  overflow-y: auto;
+  max-height: 400px;
+  box-sizing: border-box;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-20%);
+  border: 3px solid #a1b9e5;
+  border-radius: 25px;
+}
+
+.tableRes {
+  table-layout: fixed;
+  width: 100%;
+  height: 100%;
+  border-collapse: collapse;
+}
+
+.tableauRes th {
+  background-color: #a1b9e5;
+  border-bottom: 3px solid #a1b9e5;
+  border-right: 3px solid #a1b9e5;
+  padding: 8px;
+  text-align: center;
+  top: 0;
+  position: sticky;
+}
+
+.tableauRes th:first-child {
+  border-radius: 21px 0 0 0;
+}
+
+.tableauRes th:last-child {
+  border-radius: 0 21px 0 0;
+  border-right: none;
+}
+
+.tableauRes td {
+  border-bottom: 3px solid #a1b9e5;
+  border-right: 3px solid #a1b9e5;
+  padding: 8px;
+}
+
+.tableauRes td:nth-child(2),
+.tableauRes td:nth-child(3) {
+  text-align: center;
+}
+
+.tableauRes td:last-child {
+  border-right: none;
+}
+
+.tableauRes tr:last-child td {
+  border-bottom: none;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  color: #00093b;
+}
+
+.tableauRes tbody {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700; /* Met le texte en gras */
+  font-size: 16px;
+  color: #00093b;
+}
+
+.pie-chart-container {
+  width: 50%;
+  height: 80%;
+  margin-left: 30px;
+}
+.voteEnCours {
+  /* Vote en cours... */
+
+  width: 490px;
+  height: 77px;
+  position: absolute;
+  left: 52%;
+  top: 48%;
+  transform: translate(-50%, -50%);
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 64px;
+  line-height: 77px;
+
+  color: #00093b;
+}
+
+@media (max-width: 1330px) {
+  .popup {
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    transform: none;
+  }
+
+  .borderRes {
+    width: auto;
+    height: auto;
+    margin: 20px;
+    overflow: hidden;
+  }
+
+  .tableMembre {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  .urneTitre {
+    padding: 20px;
+    height: auto;
+    width: auto;
+  }
+
+  .borderMembre {
+    width: auto;
+    height: auto;
+    margin: 20px;
+    overflow: hidden;
+  }
+
+  .tableMembre {
+    width: 80%;
+    min-width: 600px;
+    height: 400px;
+    margin: 2 auto;
+  }
+}
