@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Login from './pages/login';
 import Election from './pages/election';
+import ChiffreTest from './pages/chiffreTest';
 import Visu from './pages/visu';
 import Visu1 from './pages/visu1';
 import Visu2 from './pages/visu2';
@@ -33,7 +34,7 @@ function App() {
       {/* <Login /> */}
       <SidebarProvider>
         <Sidebar />
-        <Visu />
+        <ChiffreTest />
       </SidebarProvider>
     </>
   )
