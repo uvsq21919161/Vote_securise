@@ -25,7 +25,7 @@ delta = math.factorial(nb_serv)
 # les clé secrètes partagées et combiner le résultat final
 
 data = generate(nb_serv,t,delta)
-print(json.dumps({"nbserv":str(nb_serv),"t":str(data["t"]),"candidats":str(candidats),
+print(json.dumps({"nbserv":str(nb_serv),"n2":str(data["t"]),"candidats":str(candidats),
             "delta":str(delta),"p":str(data["p"]),"q":str(data["q"]),
             "p_prim":str(data["p_prim"]),"q_prim":str(data["q_prim"]),
             "n":str(data["n"]),"m":str(data["m"]),"beta":str(data["beta"]),
