@@ -13,7 +13,7 @@ console.log("marche ta mère", process.env.MONGO_URL);
 mongoose
   .connect(process.env.MONGO_URL)
   .then(() => console.log("Connexion bdd reussie"))
-  .catch((err) => console.log("Connexion bdd echouée", err));
+  .catch((err) => console.log("Connexion bdd echouée","marche ta mère", process.env.MONGO_URL, err));
 
 // Paramètrage de l'application principale
 app.use(cors());
