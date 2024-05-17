@@ -21,6 +21,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 
+console.log("marche ta mère");
 // Définit le chemin pour retrouver les modules du serveur
 app.use('/api/chi', require('./server/routes/ChiffrementRoute'));
 app.use('/api/init', require('./server/routes/InitVoteRoute'));
