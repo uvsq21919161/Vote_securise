@@ -99,3 +99,116 @@
     padding: 1rem;
     cursor: pointer;
 }
+
+.schema {
+  display: flex;
+  justify-content: center;
+  margin-top: -70px;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  
+}
+
+.buttonElement1 {
+  flex: 1;
+  text-align: right;
+  padding-right: 50px;
+}
+
+.buttonElement2 {
+  flex:1;
+  text-align: left;
+  padding-left: 50px;
+}
+
+.button2 {
+  background-color: #517AC1;
+  font-family: 'Inter';
+  font-size: 1rem;
+  text-align: center;
+  color: #ffffff;
+  border: none;
+  border-radius: 1rem;
+  padding: 1rem 8rem 1rem 8rem;
+  cursor: pointer;
+}
+
+.positionLegende1 {
+  margin-left: 64%;
+  width: 24%;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.positionLegende2 {
+  margin-top: -450px;
+  margin-left: 64%;
+  width: 24%;
+  padding-top: 50px;
+  padding-bottom: 200px;
+}
+
+.positionLegende3 {
+  margin-top: -330px;
+  margin-left: 55%;
+  width: 35%;
+  padding-top: 50px;
+  padding-bottom: 200px;
+}
+
+.positionLegende4 {
+  margin-top: -470px;
+  margin-left: 67%;
+  width: 24%;
+  padding-top: 50px;
+  padding-bottom: 200px;
+}
+
+.positionLegende5 {
+  margin-left: 36%;
+  width: 23%;
+  padding-top: 50px;
+  padding-bottom: 60px;
+}
+
+.positionLegende6 {
+  margin-top: -500px;
+  margin-left: 64%;
+  width: 23%;
+  padding-top: 50px;
+  padding-bottom: 200px;
+}
+
+.positionLegende7 {
+  margin-top: -350px;
+  margin-left: 52%;
+  width: 32%;
+  padding-top: 50px;
+  padding-bottom: 200px;
+}
+
+.positionLegende8 {
+  margin-top: -360px;
+  margin-left: 65%;
+  width: 29%;
+  padding-top: 50px;
+  padding-bottom: 100px;
+}
+
+.legende {
+  background-color: #E7EEFA;
+  padding: 30px;
+  margin: 0 30px 0 30px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 30px;
+  text-align: center;
+  font-family: 'Inter';
+  color: #000A3C;
+  font-size: 32px;
+  font-weight: 700;
+}
