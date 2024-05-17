@@ -8,7 +8,7 @@ const cors = require('cors');
 
 // Créer l'instance de l'application
 const app = express();
-
+console.log("marche ta mère", process.env.MONGO_URL);
 // Connexion à la base de données
 mongoose
   .connect(process.env.MONGO_URL)
