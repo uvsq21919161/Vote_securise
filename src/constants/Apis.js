@@ -1,4 +1,4 @@
 export default {
-  APIuri: process.env.API_URL
+  APIuri: "https://comott-sev-8640703534c1.herokuapp.com"
 };
 
