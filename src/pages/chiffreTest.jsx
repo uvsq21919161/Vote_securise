@@ -9,6 +9,8 @@ import React from "react";
 function ChiffreTest() {
   const {isSideBarExpanded, setIsSideBarExpanded} = useContext(SidebarContext);
 
+  console.log(API.APIuri);
+
   const [message, setMessage] = React.useState("");
 
   const [mail, setMail] = React.useState("");
