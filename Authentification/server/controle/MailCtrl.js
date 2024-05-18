@@ -1,4 +1,5 @@
 const nodemailer = require("nodemailer");
+const dotenv = require("dotenv").config();
 
 const transporter = nodemailer.createTransport({
     host: 'mail.gmx.com',
@@ -9,7 +10,7 @@ const transporter = nodemailer.createTransport({
     },
     auth: {
       user: "mycomott@gmx.fr",
-      pass: "Jesuiscomottdeouf78180!",
+      pass: process.env.MAIL_PASS,
     },
     tls: {
       rejectUnauthorized: false
