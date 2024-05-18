@@ -1,4 +1,4 @@
 export default {
-  APIuri: "http://localhost:8000"
+  APIuri: process.env.API_URL
 };
 

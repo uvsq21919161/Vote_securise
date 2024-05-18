@@ -1,3 +1,4 @@
 node_modules/
 Authentification/node_modules/*
 Authentification/.env
+src/.env
