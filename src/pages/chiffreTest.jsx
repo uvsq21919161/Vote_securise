@@ -69,10 +69,10 @@ function ChiffreTest() {
       <div className="container">
         <div className="page" style={styleSidebarexpanded}>
           <div className="entete">
-            <Button onClick={() => {handleInit()}}>INITIALISE TA MERE</Button>
+            <Button onClick={() => {handleInit()}}>INITIALISER</Button>
           </div>
           <input onChange={e => {setMessage(e.target.value)}}></input>
-          <button onClick={() => (handleChiffrement())}>CHIFFRE TA MERE</button>
+          <button onClick={() => (handleChiffrement())}>CHIFFRER</button>
         </div>
       </div>
     </div>
