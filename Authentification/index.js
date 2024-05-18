@@ -8,7 +8,6 @@ const cors = require('cors');
 
 // Créer l'instance de l'application
 const app = express();
-console.log("marche ta mère", process.env.MONGO_URL);
 // Connexion à la base de données
 mongoose
   .connect(process.env.MONGO_URL)
@@ -21,7 +20,6 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 
-console.log("marche ta mère");
 // Définit le chemin pour retrouver les modules du serveur
 app.use('/api/chi', require('./server/routes/ChiffrementRoute'));
 app.use('/api/init', require('./server/routes/InitVoteRoute'));
