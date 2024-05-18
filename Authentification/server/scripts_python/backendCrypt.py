@@ -21,6 +21,6 @@ for j in range(candidats):
     vote = 1
   else:
     vote = 0
-  l_votes.append(str(chiffrer(g,n,vote,j)))
+  l_votes.append(str(chiffrer(g,n,vote)))
 
 print(json.dumps({"votes":l_votes}))
