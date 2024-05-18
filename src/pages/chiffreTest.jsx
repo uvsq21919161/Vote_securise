@@ -23,7 +23,17 @@ function ChiffreTest() {
 
   const [ci, setCi] = React.useState("");
 
+  const [candidatFinalC, setCandidatFinalC] = React.useState("");
+
   const [candidat, setCandidat] = React.useState("");
+
+  const [nomCandidat, setNomCandidat] = React.useState("");
+
+  const [description, setDescription] = React.useState("");
+
+  const [candidatRecherche, setCandidatRech] = React.useState("");
+
+  const [indice, setIndice] = React.useState("")
 
   const handleInit = async() => {
     console.log("J'aime initialiser des processus de chiffrement");
@@ -133,7 +143,7 @@ function ChiffreTest() {
           'Content-Type': 'application/json' 
       },
       body: JSON.stringify({
-        candidat: 1
+        candidat: candidatFinalC
       })
     });
   }
@@ -147,9 +157,59 @@ function ChiffreTest() {
       body: JSON.stringify({
         ci: ci,
         mail: "thomasjoly04@gmail.com",
-        candidat: candidat
+        candidat: candidat,
+        indice: indice
       })
     });
+  }
+
+  const addCandidat = async() => {
+    let res = await fetch(`${API.APIuri}/api/candidat/add`, {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json' 
+      },
+      body: JSON.stringify({
+        nom: nomCandidat,
+        description: description
+      })
+    });
+  };
+
+  const computeCandidati = async() => {
+    let res = await fetch(`${API.APIuri}/api/ci/getcandidat`, {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json' 
+      },
+      body: JSON.stringify({
+        candidat: candidatRecherche
+      })
+    });
+    const liste_ci = await res.json();
+    console.log(liste_ci);
+    let res2 = await fetch(`${API.APIuri}/api/combine/compute`, {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json' 
+      },
+      body: JSON.stringify({
+        candidat: candidatRecherche,
+        ci: liste_ci
+      })
+    });
+    const resultatI = await res2.json();
+    let lastone = await fetch(`${API.APIuri}/api/candidat/update`, {
+      method: 'PUT',
+      headers: {
+          'Content-Type': 'application/json' 
+      },
+      body: JSON.stringify({
+        idcandidat: candidatRecherche,
+        resultat: resultatI
+      })
+    });
+
   }
 
   return (
@@ -170,10 +230,17 @@ function ChiffreTest() {
           <input placeholder="mail" onChange={e => {setMail(e.target.value)}}></input>
           <button onClick={() => (addMail())} >AJOUTE MAIL TEST </button>
           <button onClick={() => (showMails())} style={{marginRight:"1500px"}} >SHOW MAILS </button>
+          <input placeholder="Numero du candidat pour lequel calculer le produit" onChange={e => {setCandidatFinalC(e.target.value)}}></input>
           <button onClick={() => (calcProd())} style={{marginRight:"1500px"}} >CALC PROD </button>
           <input placeholder="ci" onChange={e => {setCi(e.target.value)}}></input>
-          <input placeholder="candidat" onChange={e => {setCandidat(e.target.value)}}></input>
+          <input placeholder="candidat associé au ci" onChange={e => {setCandidat(e.target.value)}}></input>
+          <input placeholder="indice" onChange={e => {setIndice(e.target.value)}}></input>
           <button onClick={() => (sendCi())} style={{marginRight:"1500px"}} >SEND CI </button>
+          <input placeholder="Nom du candidat" onChange={e => {setNomCandidat(e.target.value)}}></input>
+          <input placeholder="Description du candidat" onChange={e => {setDescription(e.target.value)}}></input>
+          <button onClick={() => (addCandidat())} style={{marginRight:"1500px"}} > Ajouter le candidat </button>
+          <input placeholder="Num du candidat recherché" onChange={e => {setCandidatRech(e.target.value)}}></input>
+          <button onClick={() => (computeCandidati())} style={{marginRight:"1500px"}} > Rechercher les ci du candidat </button>
         </div>
       </div>
     </div>

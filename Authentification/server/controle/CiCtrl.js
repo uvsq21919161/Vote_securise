@@ -5,13 +5,14 @@ const Ci = require("../modeles/CiModel");
 const ciCtrl = {};
 
 ciCtrl.add = async (req, res) => {
-  const { ci, mail, candidat } = req.body;
+  const { ci, mail, candidat, indice} = req.body;
 
   const _id = new mongoose.Types.ObjectId();
 
   const newCi = new Ci({
     _id: _id,
     ci: ci,
+    indice: indice,
     mailadmin: mail,
     candidat: candidat,
   });
@@ -27,5 +28,19 @@ ciCtrl.add = async (req, res) => {
       });
     });
 };
+
+ciCtrl.getCandidat = async(req, res) => {
+  const {candidat} = req.body;
+
+  const candidatci = await Ci.find({"candidat": candidat}).sort({indice:1});
+
+  let l = [];
+
+  for (let i = 0; i < candidatci.length; i++) {
+    l.push(candidatci[i].ci);
+  };
+
+  res.json(l);
+}
 
 module.exports = ciCtrl;

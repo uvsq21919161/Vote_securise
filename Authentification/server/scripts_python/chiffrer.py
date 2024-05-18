@@ -6,7 +6,7 @@ import sys
 
 sys.setrecursionlimit(4096)
 
-def chiffrer(g,n,m,candidat):
+def chiffrer(g,n,m):
     x = generateZn(n)
 
     t = n**2

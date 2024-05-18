@@ -16,7 +16,7 @@ def usoj(delta,j,nbserv):
 def lfunc(u,n):
     return (u-1)//n
 
-def decrypt(s,delta,teta,n,nbserv,c=0):
+def decrypt(s,delta,teta,n,nbserv):
     t = n**2
     res = 1
     for i in range(len(s)):
@@ -26,4 +26,4 @@ def decrypt(s,delta,teta,n,nbserv,c=0):
     p1 = lfunc(res,n)
     p2 = pow(4*teta*(delta**2),-1,n)
     m = (p1*p2)%n
-    return m
+    return m, p1, p2

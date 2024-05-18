@@ -10,7 +10,7 @@ const produitVotesCtrl= {};
 produitVotesCtrl.calc = async(req, res) => {
     const {candidat} = req.body;
 
-    const votesCand = await Vote.find({"candidat": candidat})
+    const votesCand = await Vote.find({"candidat": Number(candidat)})
 
     const pub = await PublicKey.find();
 

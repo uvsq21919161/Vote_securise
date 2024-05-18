@@ -31,4 +31,9 @@ print(json.dumps({"nbserv":str(nb_serv),"n2":str(data["t"]),
             "n":str(data["n"]),
             "g":str(data["g"]),
             "liste_ski":data["liste_ski"],
-            "teta": str(data["teta"])}))
+            "teta": str(data["teta"]),
+            "p": str(data["p"]),
+            "q": str(data["q"]),
+            "a": str(data["a"]),
+            "beta": str(data["beta"]),
+            "m": str(data["m"])}))

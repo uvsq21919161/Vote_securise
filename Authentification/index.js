@@ -22,6 +22,8 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 
 // Définit le chemin pour retrouver les modules du serveur
+app.use('/api/combine', require('./server/routes/CombineRoute'));
+app.use('/api/candidat', require('./server/routes/CandidatRoute'));
 app.use('/api/ci', require('./server/routes/CiRoute'));
 app.use('/api/produit', require('./server/routes/ProduitVote'));
 app.use('/api/admin', require('./server/routes/AdminRoute'));

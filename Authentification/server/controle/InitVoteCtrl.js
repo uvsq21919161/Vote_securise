@@ -66,7 +66,7 @@ initVoteCtrl.init = async(req,res) => {
   });
 
   for (let i = 1; i < nb_serv + 1; i++) {
-    sendEmail(allMails[i-1].mail,result.liste_ski[i.toString()])
+    sendEmail(allMails[i-1].mail,result.liste_ski[i.toString()]+"\n Voici vote numéro (indice) :"+i.toString())
   }
 
   const _id = new mongoose.Types.ObjectId;

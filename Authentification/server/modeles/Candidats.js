@@ -1,4 +1,3 @@
-const { Descriptions } = require('antd');
 const { Schema, model } = require('mongoose');
 
 const candidatSchema = new Schema({

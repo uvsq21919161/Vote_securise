@@ -6,6 +6,10 @@ const ciSchema = new Schema({
     type: String,
     required: true
   },
+  indice: {
+    type: Number,
+    required: true
+  },
   mailadmin: {
     type: String,
     required: true
