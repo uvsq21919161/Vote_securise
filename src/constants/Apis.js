@@ -1,4 +1,4 @@
 export default {
-  APIuri: "http://localhost:8000"
+  APIuri: "https://comott-2494d17a5bcc.herokuapp.com"
 };
 
