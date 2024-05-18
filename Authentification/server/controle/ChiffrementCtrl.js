@@ -25,6 +25,13 @@ chiffreContr.chiffre = async(req,res) => {
   const g = pub[0].g;
   const n = pub[0].n;
 
+  const d = new Date();
+
+  if (d.getTime() > pub[0].date_fin) {
+    res.json("Vote terminé...");
+    return;
+  }
+
   const py = spawn("python", ['server/scripts_python/backendCrypt.py',message,candidats,g,n]);
 
   const result = await new Promise((resolve,reject) => {

@@ -201,7 +201,7 @@ def generate(nbserv,tm,delta):
         json.dump(liste_ski,write_file,indent=4)
    """
    #print("Fin de la génération !")
-    return {"p":p,"q":q,"p_prim":p_prim,"q_prim":q_prim,"n":n,"m":m,"beta":beta,"t":t,"g":g,"betam":betam,"liste_ski":liste_ski}
+    return {"n":n,"t":t,"g":g,"liste_ski":liste_ski, "teta": teta}
 
 
 '''

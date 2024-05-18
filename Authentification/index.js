@@ -11,7 +11,7 @@ const app = express();
 
 // Connexion à la base de données
 mongoose
-  .connect(process.env.MONGO_URL)
+  .connect(process.env.MONGO_DB)
   .then(() => console.log("Connexion bdd reussie"))
   .catch((err) => console.log("Connexion bdd echouée", err));
 
@@ -22,6 +22,10 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 
 // Définit le chemin pour retrouver les modules du serveur
+app.use('/api/ci', require('./server/routes/CiRoute'));
+app.use('/api/produit', require('./server/routes/ProduitVote'));
+app.use('/api/admin', require('./server/routes/AdminRoute'));
+app.use('/api/mail', require('./server/routes/MailRoute'));
 app.use('/api/chi', require('./server/routes/ChiffrementRoute'));
 app.use('/api/init', require('./server/routes/InitVoteRoute'));
 app.use('/api/vote', require('./server/routes/VoteRoute'));
