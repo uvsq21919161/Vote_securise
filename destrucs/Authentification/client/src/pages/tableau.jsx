@@ -2,7 +2,6 @@
 // Imports
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "../styles/authentication.css";
 import axios from "axios";
 
 // Fonction Dashboard qui sera modifiée pour devenir un menu

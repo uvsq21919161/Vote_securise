@@ -22,6 +22,7 @@
 
 .flexcontainer {
     display: flex;
+    flex-wrap: wrap;
 }
 
 .candidats {
@@ -49,10 +50,18 @@
     border: 1px solid #809BCE;
     border-radius: 20px;
     margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    position: relative;
 }
 
 .candidatname {
     font-weight: 600;
+}
+
+.unfold_icon {
+    position: absolute;
+    right: 30px;
 }
 
 .bulletin {
@@ -95,7 +104,7 @@
     text-align: center;
     color: #ffffff;
     border: none;
-    border-radius: 1rem;
-    padding: 1rem;
+    border-radius: 0.8rem;
+    padding: 0.8rem;
     cursor: pointer;
 }

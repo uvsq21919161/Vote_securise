@@ -1,11 +1,25 @@
-import { useContext, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import "./guide.css";
+import img_login from "../assets/guide/ImgLogin.png";
+import img_tableau from "../assets/guide/imgTableau.png";
+import img_election1 from "../assets/guide/imgElection1.png";
+import img_visu from "../assets/guide/imgVisuUrne.png";
+import img_resultats from "../assets/guide/imgResultats.png";
+import img_bureau from "../assets/guide/imgBureau.png";
+import img_listecandidats from "../assets/guide/imgListeCandidats.png";
+import img_validation from "../assets/guide/imgValidation.png";
 import { SidebarContext } from "../components/Sidebarprovider";
 
 function Guide() {
   const { isSideBarExpanded, setIsSideBarExpanded } =
     useContext(SidebarContext);
 
+  const { selectedMenu, setSelectedMenu } = useContext(SidebarContext);
+  useEffect (() => {
+   if (selectedMenu !== "Guide") {
+    setSelectedMenu("Guide");
+   } 
+  },[selectedMenu]);
   const styleSidebarexpanded = {
     marginLeft: isSideBarExpanded ? "275px" : "55px",
     transition: "margin-left 0.2s ease",
@@ -33,15 +47,18 @@ function Guide() {
   };
 
   return (
-    <>
+    <React.Fragment>
       <div className="calque">
         <div className="container">
           <div className="page" style={styleSidebarexpanded}>
-            <div className="entete">
-              <h1 className="title">Guide de l'électeur</h1>
-              <p className="headinfo">
-                Voici un guide de l'électeur pour vous indiquer comment
-                procéder.
+            <div className="exemple" />
+            {
+              <div className="entete">
+                <h1 className="title">Guide de l'électeur</h1>
+                <p className="headinfo">
+                  Voici un guide de l'électeur pour vous indiquer comment
+                  procéder.
+                </p>
                 <br />
                 <br />
                 <p className="plan">Plan</p>
@@ -167,45 +184,49 @@ function Guide() {
                     </ul>
                   </li>
                 </ul>
-              </p>
-            </div>
-            <div className="flexcontainer"></div>
+              </div>
+            }
+            <div className="flexcontainer" id="guide_flex"></div>
             <div className="chaptitre" ref={targetchap1}>
               <p>I - Accès à la plateforme de vote</p>
             </div>
-            <div>
-              <p className="paragrapheChap">
-                Votre identifiant votant personnel est votre numéro étudiant,
-                retrouvable sur votre compte IZLY.
-                <br />
-                Un code confidentiel, valable durant 3 minutes, vous est ensuite
-                envoyé par email, à l'adresse reliée à votre compte IZLY.
-                <br />
-                <br />
-                À l'aide d'un ordinateur, d'une tablette ou d'un téléphone relié
-                à internet, vous devez vous connecter au site dédié à
-                l'élection.
-                <br />
-                La plateforme de vote est accessible sur tout type de navigateur
-                à jour de la dernière version majeure (Google Chrome, Microsoft
-                Edge, Safari, Mozilla Firefox).
-                <br />
-                <br />
-                Vous devez saisir sur la page <strong>Identification</strong> :
-                <p className="enumeration">
-                  <li>Votre identifiant votant</li>
-                  <li>Le code reçu par email</li>
-                </p>
-                <div className="imgLogin"></div>
-                <br />
-                <p className="paragraphe">
-                  Une fois connecté à la plateforme de vote, vous serez
-                  automatiquement redirigé vers le{" "}
-                  <strong>Tableau de bord</strong>.
-                </p>
-                <br />
-                <div className="imgTableau"></div>
-              </p>
+            <p className="paragrapheChap">
+              Votre identifiant votant personnel est votre numéro étudiant,
+              retrouvable sur votre compte IZLY.
+              <br />
+              Un code confidentiel, valable durant 3 minutes, vous est ensuite
+              envoyé par email, à l'adresse reliée à votre compte IZLY.
+              <br />
+              <br />
+              À l'aide d'un ordinateur, d'une tablette ou d'un téléphone relié à
+              internet, vous devez vous connecter au site dédié à l'élection.
+              <br />
+              La plateforme de vote est accessible sur tout type de navigateur à
+              jour de la dernière version majeure (Google Chrome, Microsoft
+              Edge, Safari, Mozilla Firefox).
+              <br />
+              <br />
+              Vous devez saisir sur la page <strong>Identification</strong> :
+            </p>
+            <p className="enumeration">
+              <li>Votre identifiant votant</li>
+              <li>Le code reçu par email</li>
+            </p>
+            <div className="flexcontainer" id="guide_flex">
+              <div className="imgContainer">
+                <img className="imageLogin" src={img_login}></img>
+              </div>
+            </div>
+            <br />
+            <p className="paragrapheChap">
+              Une fois connecté à la plateforme de vote, vous serez
+              automatiquement redirigé vers le <strong>Tableau de bord</strong>.
+            </p>
+            <br />
+            <div className="flexcontainer" id="guide_flex">
+              <div className="imgContainer">
+                <img className="imageTableau" src={img_tableau}></img>
+              </div>
             </div>
             <br />
             <br />
@@ -248,8 +269,12 @@ function Guide() {
                 candidatures" sur le tableau de bord électeur.
                 <br />
                 <br />
-                <div className="imgElection1"></div>
               </p>
+              <div className="flexcontainer" id="guide_flex">
+                <div className="imgContainer Election1">
+                  <img className="imageElection1" src={img_election1}></img>
+                </div>
+              </div>
             </div>
             <br />
             <div className="partietitre" ref={targetpartie2_2}>
@@ -273,8 +298,12 @@ function Guide() {
                 l'urne.
                 <br />
                 <br />
-                <div className="imgVisuUrne"></div>
               </p>
+              <div className="flexcontainer" id="guide_flex">
+                <div className="imgContainer VisuUrne">
+                  <img className="imageVisuUrne" src={img_visu}></img>
+                </div>
+              </div>
             </div>
             <br />
             <div className="partietitre" ref={targetpartie2_3}>
@@ -295,8 +324,12 @@ function Guide() {
                 L'ensemble des résultats s'affichera alors à l'écran.
                 <br />
                 <br />
-                <div className="imgResultats"></div>
               </p>
+              <div className="flexcontainer" id="guide_flex">
+                <div className="imgContainer Resultats">
+                  <img className="imageResultats" src={img_resultats}></img>
+                </div>
+              </div>
             </div>
             <div className="partietitre" ref={targetpartie2_4}>
               <p>4. Voir les membres du bureau de vote</p>
@@ -317,8 +350,12 @@ function Guide() {
                 membres du bureau".
                 <br />
                 <br />
-                <div className="imgBureau"></div>
               </p>
+              <div className="flexcontainer" id="guide_flex">
+                <div className="imgContainer Bureau">
+                  <img className="imageBureau" src={img_bureau}></img>
+                </div>
+              </div>
             </div>
             <div className="chaptitre" ref={targetchap3}>
               <p>III - Comment voter</p>
@@ -341,7 +378,6 @@ function Guide() {
                 votre choix.
                 <br />
                 <br />
-                <div className="imgListeElections"></div>
               </p>
             </div>
             <div className="partietitre" ref={targetpartie3_2}>
@@ -360,10 +396,17 @@ function Guide() {
                 bouton "Etape suivante" pour accéder à l'étape de confirmation.
                 <br />
                 <br />
-                <div className="imgListeCandidats"></div>
-                <br />
-                <br />
               </p>
+              <div className="flexcontainer" id="guide_flex">
+                <div className="imgContainer ListeCandidats">
+                  <img
+                    className="imageListeCandidats"
+                    src={img_listecandidats}
+                  ></img>
+                </div>
+              </div>
+              <br />
+              <br />
             </div>
             <div className="partietitre" ref={targetpartie3_3}>
               <p>3. Voter blanc</p>
@@ -422,10 +465,14 @@ function Guide() {
                 depuis sa construction sur votre navigateur.
                 <br />
                 <br />
-                <div className="imgValidation"></div>
-                <br />
-                <br />
               </p>
+              <div className="flexcontainer" id="guide_flex">
+                <div className="imgContainer Validation">
+                  <img className="imageValidation" src={img_validation}></img>
+                </div>
+              </div>
+              <br />
+              <br />
             </div>
             <div className="partietitre" ref={targetpartie3_5}>
               <p>5. Récepissé de vote</p>
@@ -477,8 +524,8 @@ function Guide() {
                 affichés, ils ne seront plus accessibles.
                 <br />
                 <br />
-                <div className="imgRecepisse"></div>
               </p>
+              <div className="imgRecepisse"></div>
             </div>
             <div className="chaptitre" ref={targetchap4}>
               <p>IV - Visualisation des serveurs</p>
@@ -496,7 +543,7 @@ function Guide() {
           </div>
         </div>
       </div>
-    </>
+    </React.Fragment>
   );
 }
 

@@ -1,12 +1,18 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./Sidebar.css";
 import Comott from "../assets/Comott.png";
 import { SidebarContext } from "./Sidebarprovider";
 
 function Sidebar() {
-  const [selectedMenu, setSelectedMenu] = useState("Tableau de bord");
+  const navigate = useNavigate();
+  const {selectedMenu, setSelectedMenu} = useContext(SidebarContext);
   const {isSideBarExpanded, setIsSideBarExpanded} = useContext(SidebarContext);
+
+  const location = useLocation();
+  if (location.pathname === '/login' || location.pathname === '/') {
+    return null;
+  }
 
   const toggleSideBar = () => {
     setIsSideBarExpanded(!isSideBarExpanded);
@@ -26,6 +32,8 @@ function Sidebar() {
 
   const handleMenuClick = (page) => {
     setSelectedMenu(page);
+    navigate("/" + page);
+    //soit navigate soit link
   };
 
   return (
@@ -33,9 +41,9 @@ function Sidebar() {
       <div className="sidebarcontainer" style={styleSidebar}>
         <img className="logosidebar" src={Comott} />
         <ul className="menu">
-          <li className= {selectedMenu === "Tableau de bord" ? "menu-item selecteditem" : "menu-item"} onClick={() => handleMenuClick("Tableau de bord")}>
+          <li className= {selectedMenu === "Tableau" ? "menu-item selecteditem" : "menu-item"} onClick={() => handleMenuClick("Tableau")}>
             <img className="icon" src="src/assets/icon/tableau_de_bord.png" />
-            {isSideBarExpanded && <span className={selectedMenu === "Tableau de bord" ? "item selected" : "item"}>Tableau de bord</span>}
+            {isSideBarExpanded && <span className={selectedMenu === "Tableau" ? "item selected" : "item"}>Tableau de bord</span>}
           </li>
           <li className= {selectedMenu === "Election" ? "menu-item selecteditem" : "menu-item"} onClick={() => handleMenuClick("Election")}>
             <img className="icon" src="src/assets/icon/vote.png"/>

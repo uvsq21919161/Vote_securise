@@ -20,24 +20,20 @@ class Signin {
    * qu'ils sont dans la base de données.
    */
   async validateonSubmit() {
-    let self = this;
-    let error = 0;
-    if (error == 0) {
-      const username = this.form.username;
-      const password = this.form.password;
-      try {
-        const { data } = await axios.post("/login", { username, password });
-        if (!data.error) {
-          this.navigate("/dashboard");
-        } else {
-          this.setFormData({
-            ...this.form,
-            errorMsg: data.error,
-          });
-        }
-      } catch (error) {
-        console.log(error);
+    const username = this.form.username;
+    const password = this.form.password;
+    try {
+      const { data } = await axios.post("/login", { username, password });
+      if (!data.error) {
+        this.navigate("/dashboard");
+      } else {
+        this.setFormData({
+          ...this.form,
+          errorMsg: data.error,
+        });
       }
+    } catch (error) {
+      console.log(error);
     }
   }
 }

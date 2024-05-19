@@ -1,57 +1,6 @@
 // Imports
 const User = require("../modeles/user");
-const { hashPassword, comparePassword } = require("../aide/hachage");
 const nodemailer = require("nodemailer");
-
-// Register Endpoint
-/**
- * Fonction asynchrone pour créer un nouvel utilisateur dans la base de données,
- * et enregistre le mot de passe haché.
- *
- * Si le mail ou l'username existe déjà dans la base de données, une erreur
- * sera retournée.
- *
- * @param {Object} req - requête contenant les informations de l'utilisateur
- * @param {Object} res - reponse de la requête
- */
-const registerUser = async (req, res) => {
-  try {
-    const { username, email, password } = req.body;
-    let majerror = false;
-    let msgerrormail = "";
-    let msgerrorname = "";
-    // Check si email dans la bdd
-    const existmail = await User.findOne({ email });
-    if (existmail) {
-      msgerrormail = "Email is taken already";
-      majerror = true;
-    }
-    // Check si username dans la bdd
-    const existname = await User.findOne({ username });
-    if (existname) {
-      msgerrorname = "Username is taken already";
-      majerror = true;
-    }
-    if (majerror == true) {
-      return res.json({
-        majerror,
-        errormail: msgerrormail,
-        errorname: msgerrorname,
-      });
-    }
-    // Hachage du mot de passe
-    const hashedpassword = await hashPassword(password);
-    // Création de l'utilisateur dans la base de données avec mongoose
-    const user = await User.create({
-      username,
-      email,
-      password: hashedpassword,
-    });
-    return res.json(user);
-  } catch (error) {
-    console.log(error);
-  }
-};
 
 // Login Endpoint
 /**
@@ -72,19 +21,27 @@ const loginUser = async (req, res) => {
 
     // Check si l'username existe dans la bdd
     const user = await User.findOne({ numero });
+    console.log(user)
     if (!user) {
       return res.json({
         error: "Numéro étudiant inexistant",
       });
     }
-
     // Check si le mot de passe est le bon
-    const match = await comparePassword(code, user.code);
-    if (!match || code !== 6) {
+    const match = code === user.code;
+    if (!match || code.toString().length !== 6) {
+      console.log(match,code.toString().length)
       return res.json({
         error: "Mauvais code",
       });
+    } else {
+      const userdetail = { numero: numero, email: user.email}
+      console.log(userdetail)
+      return res.json({
+        user: { numero: numero, email: user.email},
+      })
     }
+    updatePwd(email, 0);
   } catch (error) {
     console.log(error);
   }
@@ -93,9 +50,10 @@ const loginUser = async (req, res) => {
 // generateCode Endpoint
 const generateCode = async (req, res) => {
   const { numero } = req.body;
-
+console.log(numero)
   // Check si l'username existe dans la bdd
   const user = await User.findOne({ numero });
+
   if (!user) {
     return res.json({
       error: "Numéro étudiant inexistant",
@@ -126,14 +84,14 @@ const generateCode = async (req, res) => {
       console.log(err);
     }
   })
-  setTimeout(updatePwd(email, 0), 180000);
+  setTimeout(() => updatePwd(email, 0), 180000);
   return res.json();
 }
 
 const updatePwd = async (email, newcode) => {
-  UserModel.findOneAndUpdate(
+  User.findOneAndUpdate(
     { email: email }, // Filtrez l'utilisateur en utilisant son identifiant
-    { $set: { code: newcode } }, // Définissez le nouveau mot de passe
+    { $set: { code: newcode } },
     { new: true } // Si vous voulez récupérer l'objet mis à jour, utilisez { new: true }
   )
   .then(updatedUser => {
@@ -149,5 +107,5 @@ const updatePwd = async (email, newcode) => {
 }
 
 // Export
-module.exports = { registerUser, loginUser, generateCode };
+module.exports = { loginUser, generateCode };
 

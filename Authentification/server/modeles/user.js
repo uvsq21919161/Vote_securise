@@ -1,6 +1,6 @@
 // Imports
 const mongoose = require("mongoose");
-const { Schema } = mongoose;
+const { Schema, model } = mongoose;
 
 /**
  * Structure des données de l'utilisateur
@@ -21,7 +21,7 @@ const userSchema = new Schema({
 });
 
 // Connexion de mongoose, une API de mongoDB, au modèle
-const User = mongoose.model("User", userSchema);
+const User = model("User", userSchema);
 
 // Export
 module.exports = User;

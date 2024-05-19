@@ -2,11 +2,12 @@
 const express = require("express");
 const router = express.Router();
 const cors = require("cors");
+
 const {
   loginUser,
-  getProfile,
   generateCode,
 } = require("../controle/controleacces");
+//getProfile,
 
 // Paramétrage du serveur, pour l'instant en local
 router.use(
@@ -22,7 +23,6 @@ router.post("/disconnect", (req, res) => {
   res.clearCookie("token");
   return res.json(null);
 });
-router
 router.post('/generate', generateCode);
 
 // Export
