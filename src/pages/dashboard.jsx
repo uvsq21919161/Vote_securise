@@ -7,59 +7,27 @@ import resultat from "../assets/icon/Res.png";
 import group from "../assets/icon/group.png";
 import recepisse from "../assets/icon/recepisse.png";
 import urne from "../assets/icon/urne.png";
-import vote from "../assets/icon/Icon_vote.png";
-import bulletin from "../assets/icon/bulletin.png";
 import bulletin2 from "../assets/icon/bulletin2.png";
 import deco from "../assets/icon/deco.png";
+import { DashboardContext } from "../../context/dashboardContext";
+import CandidatsList from "../components/CandidatsList";
+import AdminList from "../components/AdminList";
+import Recepisse from "../components/recepisse";
+import Urne from "../components/urne";
+import axios from "axios";
 
 function Tableau() {
-  const [showRes, setRes] = useState(false);
   const [showNotif1, setshowNotif1] = useState(true);
   const [showNotif2, setshowNotif2] = useState(true);
-  const [showUrne, setshowUrne] = useState(false);
-  const [empreinte, setEmpreinte] = useState("");
-  const [showResEmpreinte, setResEmpreinte] = useState(false);
-  const [showMembreBureau, setshowMembreBureau] = useState(false);
-  const [showCandidats, setshowCandidats] = useState(false);
-  const listeCandidats = [
-    { name: "Charbel TOUMA", characteristic: "l’aigri" },
-    { name: "Maya SANTINI ", characteristic: "l’adorable" },
-    { name: "Thanushan PIRABAKARAN", characteristic: "le diablotin " },
-    { name: "Thomas JOLY", characteristic: "il est là " },
-    { name: "Personne 1", characteristic: "Caractéristique " },
-    { name: "Personne 2", characteristic: "Caractéristique " },
-    { name: "Personne 3", characteristic: "Caractéristique " },
-    { name: "Personne 4", characteristic: "Caractéristique " },
-    { name: "Personne 5", characteristic: "Caractéristique " },
-    { name: "Personne 6", characteristic: "Caractéristique " },
-    { name: "Personne 7", characteristic: "Caractéristique " },
-    { name: "Personne 8", characteristic: "Caractéristique " },
-    { name: "Personne 9", characteristic: "Caractéristique " },
-    { name: "Personne 10", characteristic: "Caractéristique " },
-  ];
-  const membres = [
-    { nom: "Théo FRATCZAK", role: "Détenteur d’un fragment de clé" },
-    { nom: "Clémence DUMOULIN", role: "Détenteur d’un fragment de clé" },
-    { nom: "Alexandre MIHET", role: "Détenteur d’un fragment de clé" },
-    { nom: "Théo FRATCZAK", role: "Détenteur d’un fragment de clé" },
-    { nom: "Clémence DUMOULIN", role: "Détenteur d’un fragment de clé" },
-    { nom: "Alexandre MIHET", role: "Détenteur d’un fragment de clé" },
-    { nom: "Théo FRATCZAK", role: "Détenteur d’un fragment de clé" },
-    { nom: "Clémence DUMOULIN", role: "Détenteur d’un fragment de clé" },
-    { nom: "Alexandre MIHET", role: "Détenteur d’un fragment de clé" },
-    { nom: "Théo FRATCZAK", role: "Détenteur d’un fragment de clé" },
-    { nom: "Clémence DUMOULIN", role: "Détenteur d’un fragment de clé" },
-    { nom: "Alexandre MIHET", role: "Détenteur d’un fragment de clé" },
-    { nom: "Théo FRATCZAK", role: "Détenteur d’un fragment de clé" },
-    { nom: "Clémence DUMOULIN", role: "Détenteur d’un fragment de clé" },
-    { nom: "Alexandre MIHET", role: "Détenteur d’un fragment de clé" },
-    { nom: "Théo FRATCZAK", role: "Détenteur d’un fragment de clé" },
-  ];
-  const listClass = membres.length > 9 ? "long-list" : ""; // Pour mettre une ligne de separation au dernier element d'une petite liste
-  const listMembres = listeCandidats.length > 9 ? "long-list" : ""; // Pour mettre une ligne de separation au dernier element d'une petite liste
+  const [date, setDate] = useState("");
 
-  const [showRecepisse, setshowRecepisse] = useState(false);
-  const [showMailEnvoye, setshowMailEnvoye] = useState(false);
+  const { showMembreBureau, setshowMembreBureau } =
+    useContext(DashboardContext);
+  const { showCandidats, setshowCandidats } = useContext(DashboardContext);
+  const { showRecepisse, setshowRecepisse } = useContext(DashboardContext);
+  const { showRes, setRes } = useContext(DashboardContext);
+  const { showUrne, setshowUrne } = useContext(DashboardContext);
+
   const candidats = [
     { name: "Vote blanc", votes: 100 },
     { name: "Charbel TOUMA", votes: 150 },
@@ -69,6 +37,7 @@ function Tableau() {
   ];
 
   const [FinVote, setFinVote] = useState(false);
+
   const { isSideBarExpanded, setIsSideBarExpanded } =
     useContext(SidebarContext);
 
@@ -83,11 +52,27 @@ function Tableau() {
     transition: "margin-left 0.2s ease",
   };
 
+  useEffect(() => {
+    setshowCandidats(false);
+    setshowRecepisse(false);
+    setRes(false);
+    setshowUrne(false);
+    setshowMembreBureau(false);
+    axios.post("/getTime", {}).then(({ data }) => {
+      if (data.error) {
+        console.log(data.error);
+      }
+      setDate(data.date)
+    });
+  }, []);
+
+  // res
   const totalVotes = candidats.reduce(
     (total, candidat) => total + candidat.votes,
     0
   );
 
+  // res
   const data = {
     labels: candidats.map((candidat) => candidat.name),
     datasets: [
@@ -117,6 +102,7 @@ function Tableau() {
     ],
   };
 
+  //res
   const options = {
     plugins: {
       legend: {
@@ -138,19 +124,6 @@ function Tableau() {
         borderWidth: 0,
       },
     },
-  };
-  
-  const handleButtonClick = (buttonId) => {
-    //rajouter qu'il faut verifier que l'empreinte est bien dans l'urne
-
-    if (buttonId === "VerifierEmpreinte") {
-      setResEmpreinte(true);
-      console.log("empreinte recupérée");
-      console.log(empreinte);
-    } else if (buttonId === "EnvoyerMail") {
-      setshowMailEnvoye(true);
-      console.log("Mail envoyé");
-    }
   };
 
   return (
@@ -195,7 +168,7 @@ function Tableau() {
             <p className="TexteBigRect">Élection du représentant du groupe</p>
             <p className="TexteTourUnique">Tour unique</p>
             <p className="TexteDate">
-              13 mai 2024, 08:00 {">"} 24 mai 2024, 17:00
+              {date}
             </p>
             <div class="line"></div>
             <div className="Features">
@@ -316,175 +289,13 @@ function Tableau() {
         </div>
       )}
 
-      {showUrne && (
-        <div className="overlay">
-          <div className="popup">
-            <div class="headRes">
-              <img src={urne} alt="Icon urne" />
-              <p>Élection du représentant du groupe - Urne</p>
-              <div class="lineSep"></div>
-              <button
-                class="FermerRes"
-                onClick={() => {
-                  setshowUrne(false);
-                  setResEmpreinte(false);
-                }}
-              >
-                Fermer
-              </button>
-            </div>
-            <div class="borderRes">
-              <div class="urneTitre">
-                <img src={vote} alt="Icon vote" />
-                <p>
-                  Vous pouvez vérifier qu’un bulletin est bien dans l’urne en
-                  indiquant l’empreinte:
-                </p>
-              </div>
-              <div className="inputContainer">
-                <label htmlFor="empreinte">Empreinte</label>
-                <input
-                  type="text"
-                  id="empreinte"
-                  value={empreinte}
-                  onChange={(e) => setEmpreinte(e.target.value)}
-                  placeholder="a1315cc38bf7498ec24929cc38bf7f8=57024680b"
-                />
-              </div>
-              <button
-                class="bouttonVerifier"
-                id="VerifierEmpreinte"
-                type="button"
-                onClick={() => handleButtonClick("VerifierEmpreinte")}
-              >
-                Vérifier la présence du bulletin
-              </button>
-              {showResEmpreinte && (
-                <div className="popupEmpreinte">
-                  <p className="TexteEmpreinte">
-                    Élection du représentant du groupe - Tour unique :
-                    <br />
-                    Cette empreinte correspond à une entrée dans la liste
-                    d’émargement (et non pas à une empreinte de bulletin), le
-                    vote de PIRABAKARAN Thanushan a bien été enregistré le
-                    12/03/2024 à 10h32.
-                  </p>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
+      {showUrne && <Urne />}
 
-      {showMembreBureau && (
-        <div className="overlay">
-          <div className="popup">
-            <div class="headRes">
-              <img src={group} alt="Icon Membre" />
-              <p>
-                Élection du représentant du groupe - Membres du bureau de vote
-              </p>
-            </div>
-            <div className="lineDiv">
-              <div class="lineSep" />
-            </div>
-            <button
-              class="FermerRes"
-              onClick={() => setshowMembreBureau(false)}
-            >
-              Fermer
-            </button>
-            <div class="borderMembre">
-              <div class="headMembre">
-                <img src={group} alt="Icon Membre" />
-                <p>Membres du bureau de vote :</p>
-              </div>
-              <ul className={`tableMembre ${listClass}`}>
-                {membres.map((membre) => (
-                  <li className="border_bottom">
-                    <span className="nameStyle">{membre.nom}</span>
-                    <span className="rightText">{membre.role}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      )}
+      {showMembreBureau && <AdminList />}
 
-      {showCandidats && (
-        <div className="overlay">
-          <div className="popup">
-            <div class="headRes">
-              <img src={group} alt="Icon Membre" />
-              <p>Élection du représentant du groupe - Candidats</p>
-              <div class="lineSep"></div>
-            </div>
-            <button class="FermerRes" onClick={() => setshowCandidats(false)}>
-              Fermer
-            </button>
-            <div class="borderMembre">
-              <div class="headMembre">
-                <img src={group} alt="Icon Membre" />
-                <p>Candidats:</p>
-              </div>
-              <ul className={`tableMembre ${listMembres}`}>
-                {listeCandidats.map((person, index) => (
-                  <li key={index} className="border_bottom">
-                    <span className="nameCandidat">{person.name + " :"}</span>
-                    <span className="caracText">{person.characteristic}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      )}
+      {showCandidats && <CandidatsList />}
 
-      {showRecepisse && (
-        <div className="overlay">
-          <div className="popup">
-            <div class="headRes">
-              <img src={recepisse} alt="Icon urne" />
-              <p>Récépissé de vote</p>
-              <div class="lineSep"></div>
-              <button
-                class="FermerRes"
-                onClick={() => {
-                  setshowRecepisse(false);
-                  setshowMailEnvoye(false);
-                }}
-              >
-                Fermer
-              </button>
-            </div>
-            <div class="borderRes">
-              <div class="recepisseTitre">
-                <p>L’empreinte numérique de votre bulletin dans l’urne est: </p>
-              </div>
-              <div className="inputContainer">
-                <label htmlFor="Empreinte">Empreinte</label>
-                <p id="Empreinte">{empreinte}</p>
-              </div>
-              <button
-                class="bouttonVerifier"
-                id="EnvoyerMail"
-                type="button"
-                onClick={() => handleButtonClick("EnvoyerMail")}
-              >
-                Renvoyer par mail
-              </button>
-              {showMailEnvoye && (
-                <div className="popupEmpreinte">
-                  <p className="TexteEmpreinte">
-                    Votre récépissé de vote a été envoyé à votre adresse mail.
-                  </p>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
+      {showRecepisse && <Recepisse />}
     </div>
   );
 }

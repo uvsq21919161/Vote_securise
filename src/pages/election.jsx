@@ -23,12 +23,6 @@ function Election() {
     transition: "margin-left 0.2s ease",
   };
   const getCandidats = () => {
-    setCandidatsList([
-      "Charbel TOUMA",
-      "Maya SANTINI",
-      "Thanushan PIRABAKARAN",
-      "Thomas JOLY",
-    ]);
     axios.post("/getCandidats", {}).then(({ data }) => {
       if (data.error) {
         setErrorCode(data.error);
@@ -47,7 +41,7 @@ function Election() {
       setSelectedMenu("Election");
     }
   }, [selectedMenu]);
-  
+
   const handleFold = (e, element) => {
     if (e.target.dataset.index != foldContent) {
       setfoldContent(parseInt(e.target.dataset.index));
@@ -55,7 +49,7 @@ function Election() {
       setfoldContent(999);
     }
   };
-  
+
   const handleSelected = (element) => {
     setMsgBulletin(element.nom);
     if (element.id_candidat != selectCandidat) {
@@ -64,21 +58,21 @@ function Election() {
       setSelectCandidat(999);
     }
   };
-  
+
   const submitVote = () => {
     // appeler le truc de chiffré je vous mets les variables utiles
-    
+
     // contient numéro étudiant (un int) et email: {numero: 21919161, email: 'email'}
-    console.log(user)
+    console.log(user);
 
     // index du candidat selectionné
     console.log(selectCandidat);
     console.log("vote envoyé");
   };
-  
+
   return (
     <React.Fragment>
-    <div className="calque">
+      <div className="calque">
         <div className="container">
           <div className="page" style={styleSidebarexpanded}>
             <div className="entete">
@@ -92,67 +86,86 @@ function Election() {
                 confirmation.
               </p>
             </div>
-            {candidatsList.length > 0 ? <React.Fragment>
-              <div className="flexcontainer">
-                <div className="candidats">
-                {candidatsList &&
-                  candidatsList.map((element, index) => (
-                    <div className="slot" key={index}>
+            {candidatsList.length > 0 ? (
+              <React.Fragment>
+                <div className="flexcontainer">
+                  <div className="candidats">
+                    {candidatsList &&
+                      candidatsList.map((element, index) => (
+                        <div className="slot" key={index}>
+                          <div
+                            className="candidat"
+                            key={index}
+                            style={
+                              foldContent === index
+                                ? {
+                                    borderRadius: "20px 20px 0px 0px",
+                                    padding: "40px 30px 0px 30px",
+                                  }
+                                : {}
+                            }
+                          >
+                            <strong className="candidatname">
+                              {element.nom}
+                            </strong>
+                            <img
+                              className="unfold_icon"
+                              src={unfold}
+                              data-index={element.id_candidat}
+                              onClick={(e) => handleFold(e, element)}
+                            />
+                          </div>
+                          {foldContent === index && (
+                            <div className="expand">
+                              {element.description}
+                              <button
+                                className="selectCandidat"
+                                onClick={() => handleSelected(element)}
+                              >
+                                <div
+                                  className="cercle"
+                                  id={
+                                    selectCandidat === index ? "blue" : "white"
+                                  }
+                                />
+                                Sélectionner cette candidature
+                              </button>
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    <div className="slot">
                       <div
                         className="candidat"
-                        key={index}
-                        style={
-                          foldContent === index
-                            ? { borderRadius: "20px 20px 0px 0px" , padding: '40px 30px 0px 30px' }
-                            : {}
-                        }
+                        key="999"
+                        onClick={() => {
+                          setMsgBulletin("Vote blanc");
+                        }}
                       >
-                        <strong className="candidatname">{element.nom}</strong>
-                        <img
-                          className="unfold_icon"
-                          src={unfold}
-                          data-index={element.id_candidat}
-                          onClick={(e) => handleFold(e, element)}
-                        />
+                        <strong className="candidatname">Vote blanc</strong>
                       </div>
-                      {foldContent === index && (
-                        <div className="expand">{element.description}
-                          <button className="selectCandidat" onClick={() => handleSelected(element)}>
-                            <div className="cercle" id= {selectCandidat === index ? "blue" : "white"} />
-                            Sélectionner cette candidature
-                          </button>
-                        </div>
-                      )}
                     </div>
-                  ))}
-                <div className="slot">
-                  <div
-                    className="candidat"
-                    key="999"
-                    onClick={() => {
-                      setMsgBulletin("Vote blanc");
-                    }}
-                  >
-                    <strong className="candidatname">Vote blanc</strong>
                   </div>
-                </div>
-              </div>
-              <div className="containerbulletin">
-                <div className="bulletin">
-                  <div className="headerbulletin">
-                    <div className="imagebulletin" />
-                    <h2 className="headerbulletintext">Mon bulletin</h2>
-                  </div>
+                  <div className="containerbulletin">
+                    <div className="bulletin">
+                      <div className="headerbulletin">
+                        <div className="imagebulletin" />
+                        <h2 className="headerbulletintext">Mon bulletin</h2>
+                      </div>
 
-                  <p className="bodybulletin">{msgBulletin}</p>
-                  <button className="button" onClick={submitVote}>
-                    Étape suivante
-                  </button>
+                      <p className="bodybulletin">{msgBulletin}</p>
+                      <button className="button" onClick={submitVote}>
+                        Étape suivante
+                      </button>
+                    </div>
+                  </div>
                 </div>
+              </React.Fragment>
+            ) : (
+              <div className="pasVote">
+                <h1>Pas de vote disponible</h1>
               </div>
-              </div>
-              </React.Fragment> : <div className="pasVote"><h1>Pas de vote disponible</h1></div>}
-            
+            )}
           </div>
         </div>
       </div>

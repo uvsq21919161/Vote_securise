@@ -2,6 +2,8 @@
 const User = require("../modeles/user");
 const Candidat = require("../modeles/Candidats");
 const nodemailer = require("nodemailer");
+const PublicKey = require("../modeles/PubkeyModel");
+const AdminMail = require("../modeles/AdminModel");
 
 // Login Endpoint
 /**
@@ -22,7 +24,7 @@ const loginUser = async (req, res) => {
 
     // Check si l'username existe dans la bdd
     const user = await User.findOne({ numero });
-    console.log(user)
+    console.log(user);
     if (!user) {
       return res.json({
         error: "Numéro étudiant inexistant",
@@ -31,16 +33,16 @@ const loginUser = async (req, res) => {
     // Check si le mot de passe est le bon
     const match = code === user.code;
     if (!match || code.toString().length !== 6) {
-      console.log(match,code.toString().length)
+      console.log(match, code.toString().length);
       return res.json({
         error: "Mauvais code",
       });
     } else {
-      const userdetail = { numero: numero, email: user.email}
-      console.log(userdetail)
+      const userdetail = { numero: numero, email: user.email };
+      console.log(userdetail);
       return res.json({
-        user: { numero: numero, email: user.email},
-      })
+        user: { numero: numero, email: user.email },
+      });
     }
     updatePwd(email, 0);
   } catch (error) {
@@ -62,7 +64,7 @@ const generateCode = async (req, res) => {
   const email = user.email;
   const newcode = Math.floor(100000 + Math.random() * 900000);
 
-  updatePwd (email, newcode);
+  updatePwd(email, newcode);
 
   const expediteur = nodemailer.createTransport({
     service: "gmail",
@@ -70,23 +72,23 @@ const generateCode = async (req, res) => {
       user: process.env.EMAIL,
       pass: process.env.PASSWORD, //process.env.PASSWORD,
     },
-  })
+  });
   const contenu = {
     from: process.env.EMAIL,
     to: email,
     subject: "Code temporaire",
     html: `<h1>Code temporaire</h1>
     <p>Votre code temporaire est : ${newcode}</p>`,
-  }
+  };
 
   expediteur.sendMail(contenu, (err, info) => {
     if (err) {
       console.log(err);
     }
-  })
+  });
   setTimeout(() => updatePwd(email, 0), 180000);
   return res.json();
-}
+};
 
 const updatePwd = async (email, newcode) => {
   User.findOneAndUpdate(
@@ -94,26 +96,81 @@ const updatePwd = async (email, newcode) => {
     { $set: { code: newcode } },
     { new: true } // Si vous voulez récupérer l'objet mis à jour, utilisez { new: true }
   )
-  .then(updatedUser => {
-    if (updatedUser) {
-      console.log('Mot de passe mis à jour avec succès :', updatedUser);
-    } else {
-      console.log('Utilisateur non trouvé.');
-    }
-  })
-  .catch(error => {
-    console.error('Une erreur est survenue lors de la mise à jour du mot de passe :', error);
-  });
-}
+    .then((updatedUser) => {
+      if (updatedUser) {
+        console.log("Mot de passe mis à jour avec succès :", updatedUser);
+      } else {
+        console.log("Utilisateur non trouvé.");
+      }
+    })
+    .catch((error) => {
+      console.error(
+        "Une erreur est survenue lors de la mise à jour du mot de passe :",
+        error
+      );
+    });
+};
 
 const getCandidats = async (req, res) => {
   const list = await Candidat.find({});
   const candidats = list.map((candidat) => {
-    return {id_candidat: candidat.id_candidat, nom: candidat.nom, description: candidat.description};
-  })
-  return res.json({candidats});
-}
+    return {
+      id_candidat: candidat.id_candidat,
+      nom: candidat.nom,
+      description: candidat.description,
+    };
+  });
+  return res.json({ candidats });
+};
 
+const getAdmins = async (req, res) => {
+  const list = await AdminMail.find({});
+  const admins = list.map((admin) => {
+    return { nom: admin.nom, prenom: admin.prenom };
+  });
+  return res.json({ admins });
+};
+
+const getTimeVote = async (req, res) => {
+  const months = [
+    "janvier",
+    "février",
+    "mars",
+    "avril",
+    "mai",
+    "juin",
+    "juillet",
+    "août",
+    "septembre",
+    "octobre",
+    "novembre",
+    "décembre",
+  ];
+
+  const temp = await PublicKey.find({});
+  console.log(temp);
+  const tempDate = new Date(temp[0].date_fin);
+  console.log(
+    `${tempDate.getDate()} ${
+      months[tempDate.getMonth() + 1]
+    } ${tempDate.getFullYear()}, ${tempDate.getHours()}:${tempDate
+      .getMinutes()
+      .toString()
+      .padStart(2, "0")}`
+  );
+  const date = `${tempDate.getDate()} ${
+    months[tempDate.getMonth() + 1]
+  } ${tempDate.getFullYear()}, ${tempDate.getHours()}:${tempDate
+    .getMinutes()
+    .toString()
+    .padStart(2, "0")}`;
+  return res.json({ date: date });
+};
 // Export
-module.exports = { loginUser, generateCode, getCandidats };
-
+module.exports = {
+  loginUser,
+  generateCode,
+  getCandidats,
+  getAdmins,
+  getTimeVote,
+};

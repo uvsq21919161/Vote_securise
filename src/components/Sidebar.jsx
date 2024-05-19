@@ -32,6 +32,11 @@ function Sidebar() {
     transition: "margin-left 0.2s ease",
   }
 
+  const styleComott = {
+    visibility: isSideBarExpanded ? "visible" :"hidden",
+    height: "32px"
+  }
+
   const handleMenuClick = (page) => {
     setSelectedMenu(page);
     navigate("/" + page);
@@ -46,7 +51,7 @@ function Sidebar() {
   return (
     <>
       <div className="sidebarcontainer" style={styleSidebar}>
-        <img className="logosidebar" src={Comott} />
+        <img className="logosidebar" src={Comott} style={styleComott} />
         <ul className="menu">
           <li className= {selectedMenu === "Tableau" ? "menu-item selecteditem" : "menu-item"} onClick={() => handleMenuClick("Tableau")}>
             <img className="icon" src="src/assets/icon/tableau_de_bord.png" />

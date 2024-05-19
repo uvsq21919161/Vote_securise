@@ -15,7 +15,14 @@ chiffreContr.chiffre = async(req,res) => {
   //on doit aussi récup le message que le boug veut chiffrer mais on le récup dans les args
   //de la requête pas sur la bdd
 
-  const {message} = req.body;
+  const {message, uid} = req.body;
+
+  const verif = await Vote.find({"uid":uid});
+
+  if (verif.length > 0) {
+    res.json("Vote terminé ou vous avez déja voté...");
+    return;
+  }
 
   const pub = await PublicKey.find();
 
@@ -24,6 +31,13 @@ chiffreContr.chiffre = async(req,res) => {
   const candidats = pub[0].candidats;
   const g = pub[0].g;
   const n = pub[0].n;
+
+  const d = new Date();
+
+  if (d.getTime() > pub[0].date_fin) {
+    res.json("Vote terminé ou vous avez déja voté...");
+    return;
+  }
 
   const py = spawn("python", ['server/scripts_python/backendCrypt.py',message,candidats,g,n]);
 

@@ -25,6 +25,14 @@ const pubkeySchema = new Schema({
   delta: {
     type: Number,
     required: true
+  },
+  teta: {
+    type: String,
+    required: true
+  },
+  date_fin: {
+    type: Date,
+    required: true
   }
 });
 

@@ -6,7 +6,9 @@ const cors = require("cors");
 const {
   loginUser,
   generateCode,
-  getCandidats
+  getCandidats,
+  getAdmins,
+  getTimeVote
 } = require("../controle/controleacces");
 //getProfile,
 
@@ -26,6 +28,8 @@ router.post("/disconnect", (req, res) => {
 });
 router.post('/generate', generateCode);
 router.post('/getCandidats', getCandidats);
+router.post('/getAdmin', getAdmins);
+router.post('/getTime', getTimeVote);
 
 // Export
 module.exports = router;

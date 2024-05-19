@@ -8,11 +8,11 @@ import Sidebar from "./components/Sidebar";
 import Guide from "./pages/guide";
 import Tableau from "./pages/dashboard";
 import { UserContextProvider } from "../context/usercontext";
+import { DashboardContextProvider } from "../context/dashboardContext";
 
 // const { Header, Sider } = Layout;
 axios.defaults.baseURL = "http://localhost:7000";
 axios.defaults.withCredentials = true;
-
 
 function App() {
   return (
@@ -25,17 +25,19 @@ function App() {
       </Layout> */}
       {/* <Login /> */}
       <UserContextProvider>
-      <SidebarProvider>
-        <Sidebar />
-        <Routes>
-          <Route path="/" element={<Login />} />
-          {/* <Route path="/login" element={<Login />} /> */}
-          <Route path="/tableau" element={<Tableau />} />
-          <Route path="/election" element={<Election />} /> 
-          <Route path="/guide" element={<Guide />} />
-          {/* <Route path="/visu" element={<Visualisation />} /> */}
-        </Routes>
-      </SidebarProvider>
+        <SidebarProvider>
+          <DashboardContextProvider>
+            <Sidebar />
+            <Routes>
+              <Route path="/" element={<Login />} />
+              {/* <Route path="/login" element={<Login />} /> */}
+              <Route path="/tableau" element={<Tableau />} />
+              <Route path="/election" element={<Election />} />
+              <Route path="/guide" element={<Guide />} />
+              {/* <Route path="/visu" element={<Visualisation />} /> */}
+            </Routes>
+          </DashboardContextProvider>
+        </SidebarProvider>
       </UserContextProvider>
     </>
   );

@@ -1,12 +1,16 @@
 const { Schema, model } = require('mongoose');
 
-const votesSchema = new Schema({
+const ciSchema = new Schema({
   _id: Schema.Types.ObjectId,
-  uid: {
+  ci: {
+    type: String,
+    required: true
+  },
+  indice: {
     type: Number,
     required: true
   },
-  vote: {
+  mailadmin: {
     type: String,
     required: true
   },
@@ -16,6 +20,6 @@ const votesSchema = new Schema({
   }
 });
 
-const Vote = model('vote', votesSchema);
+const Ci = model('Ci', ciSchema);
 
-module.exports = Vote;
+module.exports = Ci;
