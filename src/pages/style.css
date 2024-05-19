@@ -20,6 +20,15 @@
     font-size: 18px;
 }
 
+.pasVote {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Inter'
+}
+
 .flexcontainer {
     display: flex;
     flex-wrap: wrap;
@@ -40,6 +49,51 @@
 .slot {
     width: calc(100% - 30px);
     margin-left: 30px;
+    margin-bottom: 25px;
+    border: 1px solid #809BCE;
+    border-radius: 20px;
+}
+
+.expand {
+    font-family: 'Inter';
+    font-size: 1.3rem;
+    background-color: #A4B5D7;
+    padding: 40px 30px 40px 30px;
+    border-radius: 0 0 20px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.selectCandidat {
+    margin-top: 20px;
+    padding: 15px;
+    width: 303px;
+    align-self: flex-end;
+    background-color: #517AC1;
+    border: none;
+    color: white;
+    border-radius: 15px;
+    font-family: 'Inter';
+    font-size: 1rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cercle {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    border: 1px solid #335796;
+}
+
+#blue {
+    background-color: #000A3C;
+}
+
+#white {
+    background-color: #ffffff;
 }
 
 .candidat {
@@ -47,9 +101,7 @@
     font-size: 1.3rem;
     background-color: #A4B5D7;
     padding: 40px 30px 40px 30px;
-    border: 1px solid #809BCE;
     border-radius: 20px;
-    margin-bottom: 25px;
     display: flex;
     align-items: center;
     position: relative;
@@ -95,6 +147,8 @@
     text-align: center;
     font-family: 'Inter';
     margin-bottom: 20px;
+    font-style: italic;
+    font-weight: 300;
 }
 
 .button {

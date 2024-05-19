@@ -3,11 +3,13 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./Sidebar.css";
 import Comott from "../assets/Comott.png";
 import { SidebarContext } from "./Sidebarprovider";
+import { UserContext } from "../../context/usercontext";
 
 function Sidebar() {
   const navigate = useNavigate();
   const {selectedMenu, setSelectedMenu} = useContext(SidebarContext);
   const {isSideBarExpanded, setIsSideBarExpanded} = useContext(SidebarContext);
+  const {setUser} = useContext(UserContext); 
 
   const location = useLocation();
   if (location.pathname === '/login' || location.pathname === '/') {
@@ -36,6 +38,11 @@ function Sidebar() {
     //soit navigate soit link
   };
 
+  const handleDeco = () => {
+    setUser(null);
+    navigate("/");
+  };
+
   return (
     <>
       <div className="sidebarcontainer" style={styleSidebar}>
@@ -57,7 +64,7 @@ function Sidebar() {
           <img className="icon" src="src/assets/icon/visualisation.png"/>
             {isSideBarExpanded && <span className={selectedMenu === "Visualisation" ? "item selected" : "item"}>Visualisation des serveurs</span>}
           </li>
-          <li className={selectedMenu === "Déconnexion" ? "menu-item selecteditem" : "menu-item"} onClick={() => handleMenuClick("Déconnexion")}>
+          <li className={selectedMenu === "Déconnexion" ? "menu-item selecteditem" : "menu-item"} onClick={() => handleDeco()}>
           <img className="icon" src="src/assets/icon/deconnexion.png"/>
             {isSideBarExpanded && <span className={selectedMenu === "Déconnexion" ? "item selected" : "item"}>Déconnexion</span>}
           </li>

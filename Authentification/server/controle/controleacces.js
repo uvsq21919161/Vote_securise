@@ -1,5 +1,6 @@
 // Imports
 const User = require("../modeles/user");
+const Candidat = require("../modeles/Candidats");
 const nodemailer = require("nodemailer");
 
 // Login Endpoint
@@ -50,7 +51,6 @@ const loginUser = async (req, res) => {
 // generateCode Endpoint
 const generateCode = async (req, res) => {
   const { numero } = req.body;
-console.log(numero)
   // Check si l'username existe dans la bdd
   const user = await User.findOne({ numero });
 
@@ -106,6 +106,14 @@ const updatePwd = async (email, newcode) => {
   });
 }
 
+const getCandidats = async (req, res) => {
+  const list = await Candidat.find({});
+  const candidats = list.map((candidat) => {
+    return {id_candidat: candidat.id_candidat, nom: candidat.nom, description: candidat.description};
+  })
+  return res.json({candidats});
+}
+
 // Export
-module.exports = { loginUser, generateCode };
+module.exports = { loginUser, generateCode, getCandidats };
 
