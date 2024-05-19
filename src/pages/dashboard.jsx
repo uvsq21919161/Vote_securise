@@ -60,21 +60,27 @@ function Tableau() {
 
   const [showRecepisse, setshowRecepisse] = useState(false);
   const [showMailEnvoye, setshowMailEnvoye] = useState(false);
-  const candidats = [
-    { name: "Vote blanc", votes: 100 },
-    { name: "Charbel TOUMA", votes: 150 },
-    { name: "Maya SANTINI", votes: 70 },
-    { name: "Thomas JOLY", votes: 10 },
-    { name: "Thanushan PIRABAKARAN", votes: 50 },
-  ];
+  const [candidats, setCandidats] = useState([]);
+  //const candidats = [
+  //  { name: "Vote blanc", votes: 100 },
+  //  { name: "Charbel TOUMA", votes: 150 },
+  //  { name: "Maya SANTINI", votes: 70 },
+  //  { name: "Thomas JOLY", votes: 10 },
+  //  { name: "Thanushan PIRABAKARAN", votes: 50 },
+  //];
 
   //useEffect(async() => {
-  //  let pub = await fetch(`${API.APIuri}/api/init/get`, {
+  //  const cands = await fetch(`${API.APIuri}/api/candidat/getall`, {
   //    method: 'GET',
   //    headers: {
   //      'Content-Type': 'application/json' 
   //    }
   //  });
+  //  const allCands = await cands.json();
+  //  const candidats = [];
+  //  for (let i = 0; i < allCands.length; i++) {
+  //    candidats.push({name: allCands[i].nom, votes: allCands[i].resultat})
+  //  }
   //}, []);
 
   const [FinVote, setFinVote] = useState(false);
