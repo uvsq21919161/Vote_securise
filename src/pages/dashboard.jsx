@@ -68,9 +68,14 @@ function Tableau() {
     { name: "Thanushan PIRABAKARAN", votes: 50 },
   ];
 
-  useEffect(() => {
-
-  }, []);
+  //useEffect(async() => {
+  //  let pub = await fetch(`${API.APIuri}/api/init/get`, {
+  //    method: 'GET',
+  //    headers: {
+  //      'Content-Type': 'application/json' 
+  //    }
+  //  });
+  //}, []);
 
   const [FinVote, setFinVote] = useState(false);
   const { isSideBarExpanded, setIsSideBarExpanded } =

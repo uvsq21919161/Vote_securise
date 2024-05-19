@@ -49,6 +49,8 @@ candidatCtrl.update = async(req,res) => {
 
 candidatCtrl.getAll = async(req, res) => {
     const allCands = await Candidat.find();
+
+    res.json(allCands);
 }
 
 module.exports = candidatCtrl;
