@@ -14,7 +14,7 @@ function Visu7() {
   };
 
   const navigateNext = () => {
-    navigate(`/Visu8`);
+    navigate(`/visu/Visu8`);
   }
 
   const navigatePrec = () => {
@@ -30,7 +30,7 @@ function Visu7() {
             <h1 className="title">Visualisation des serveurs</h1>
           </div>
           <div className="schema">
-            <img src="src/assets/schema7.png"/>
+            <img src="../src/assets/schema7.png"/>
           </div>
           <div className="positionLegende6">
             <div className="legende">

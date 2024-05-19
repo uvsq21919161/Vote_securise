@@ -3,7 +3,7 @@ const { Schema, model } = require('mongoose');
 const votesSchema = new Schema({
   _id: Schema.Types.ObjectId,
   uid: {
-    type: String,
+    type: Number,
     required: true
   },
   vote: {

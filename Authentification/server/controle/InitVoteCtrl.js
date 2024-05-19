@@ -4,29 +4,25 @@ const nodemailer = require("nodemailer");
 
 const PublicKey = require('../modeles/PubkeyModel');
 const AdminMail = require('../modeles/AdminModel');
+const Ci = require("../modeles/CiModel");
+const Candidat = require('../modeles/Candidats');
+const Vote = require ('../modeles/VotesModel');
+const ProduitVotes = require ('../modeles/ProduitVoteModel');
 
 const initVoteCtrl = {};
 
 
 const transporter = nodemailer.createTransport({
-    host: 'mail.gmx.com',
-    port: 587,
-    tls:{
-        ciphers : 'SSLv3',
-        rejectUnauthorized: false
-    },
-    auth: {
-      user: "mycomott@gmx.fr",
-      pass: "Jesuiscomottdeouf78180!",
-    },
-    tls: {
-      rejectUnauthorized: false
-    }
-  });
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL,
+    pass: process.env.PASSWORD, //process.env.PASSWORD,
+  }
+});
 
 const sendEmail = async(email, sk) => {
     await transporter.sendMail({
-        from: "mycomott@gmx.fr",
+        from: process.env.EMAIL,
         to: email,
         subject: "Ci-joint la clé secrète qui vous est associée",
         text: sk
@@ -39,11 +35,18 @@ initVoteCtrl.init = async(req,res) => {
   const {nb_serv, candidats, date_fin} = req.body; 
 
   const allMails = await AdminMail.find();
+  console.log(allMails);
 
   if (nb_serv > allMails.length) {
     res.json("Pas assez de mails admin dans la base de donnée...");
     return;
   }
+
+  await PublicKey.deleteMany({})
+  await Ci.deleteMany({})
+  await Candidat.deleteMany({})
+  await Vote.deleteMany({})
+  await ProduitVotes.deleteMany({})
 
   const py = spawn("python", ['server/scripts_python/backendInit.py',nb_serv.toString(),candidats.toString()]);
 
@@ -65,8 +68,10 @@ initVoteCtrl.init = async(req,res) => {
     });
   });
 
-  for (let i = 1; i < nb_serv + 1; i++) {
-    sendEmail(allMails[i-1].mail,result.liste_ski[i.toString()]+"\n Voici vote numéro (indice) :"+i.toString())
+
+  for (let i = 0; i < nb_serv; i++) {
+    //console.log("admin",i,"=",allMails[i-1]);
+    sendEmail(allMails[i].mail,result.liste_ski[(i+1).toString()]+"\n Voici vote numéro (indice) :"+i.toString())
   }
 
   const _id = new mongoose.Types.ObjectId;
@@ -94,5 +99,11 @@ initVoteCtrl.init = async(req,res) => {
   });
 
 };
+
+initVoteCtrl.get = async(req, res) => {
+  const pubkey = await PublicKey.find();
+
+  res.json(pubkey[0]);
+}
 
 module.exports = initVoteCtrl;

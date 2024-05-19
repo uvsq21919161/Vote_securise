@@ -10,7 +10,7 @@ function Visu1() {
   const {isSideBarExpanded, setIsSideBarExpanded} = useContext(SidebarContext);
 
   const navigateNext = () => {
-    navigate(`/Visu2`);
+    navigate(`/visu/Visu2`);
   }
 
   const styleSidebarexpanded = {

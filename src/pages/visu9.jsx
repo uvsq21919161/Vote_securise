@@ -26,7 +26,7 @@ function Visu9() {
             <h1 className="title">Visualisation des serveurs</h1>
           </div>
           <div className="schema">
-            <img src="src/assets/schema9.png"/>
+            <img src="../src/assets/schema9.png"/>
           </div>
           <div className="positionLegende8">
             <div className="legende">
