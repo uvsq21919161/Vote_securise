@@ -266,7 +266,7 @@ function Tableau() {
         })
       });
       const resultat = await res.json();
-      if (resultat.recepisse !== 0) {
+      if (resultat.recepisse !== "0") {
         setshowNotif1(true);
         setshowNotif2(true);
       }
@@ -364,7 +364,7 @@ function Tableau() {
                 type="button"
                 onClick={() => setFinVote(false)}
               >
-                {userEmpreinte==="0" ? <p>Vous n'avez pas encore voté.</p>
+                {userEmpreinte==="0" ? <p style={{color:"white"}}>Vous n'avez pas encore voté.</p>
                 : <p style={{color:"white"}}>Votre bulletin a bien été enregistré.</p>}
               </button>
               <button
