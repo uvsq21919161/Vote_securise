@@ -177,7 +177,7 @@ function Guide() {
                     <ul>
                       <p
                         className="chapitre"
-                        onClick={() => redirection(targetchap5)}
+                        onClick={() => redirection(targetchap4)}
                       >
                         Visualisation des serveurs
                       </p>

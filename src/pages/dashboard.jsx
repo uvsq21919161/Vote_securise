@@ -327,7 +327,7 @@ function Tableau() {
             <p className="TexteBigRect">Élection du représentant du groupe</p>
             <p className="TexteTourUnique">Tour unique</p>
             <p className="TexteDate">
-              {voteFini ? <p>Le vote est terminé.</p>
+              {voteFini ? <p>Le vote a pris fin le {jour}/{mois}/{anne} à {heure}:{minute}.</p>
               : <p>Le vote se termine a {heure}:{minute} le {jour}/{mois}/{anne}.</p>}
             </p>
             <div class="line"></div>
@@ -362,9 +362,10 @@ function Tableau() {
               <button
                 class="BouttonEnregister"
                 type="button"
-                onClick={() => setFinVote(true)}
+                onClick={() => setFinVote(false)}
               >
-                Votre bulletin a bien été enregistré.
+                {userEmpreinte==="0" ? <p>Vous n'avez pas encore voté.</p>
+                : <p style={{color:"white"}}>Votre bulletin a bien été enregistré.</p>}
               </button>
               <button
                 class="BouttonResultat"
