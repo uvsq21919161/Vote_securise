@@ -51,6 +51,25 @@ function Election() {
       setSelectedMenu("Election");
     }
   }, [selectedMenu]);
+
+  useEffect(() => {
+    async function checkVote() {
+      let res = await fetch(`${API.APIuri}/api/user/get`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json' 
+        },
+        body: JSON.stringify({
+          email: user.email
+        })
+      });
+      let resReadable = await res.json();
+      if (resReadable.recepisse !== "0") {
+        setMsgBulletin("Vous avez déja voté.");
+      }
+    };
+    checkVote();
+  })
   
   const handleFold = (e, element) => {
     if (e.target.dataset.index != foldContent) {
