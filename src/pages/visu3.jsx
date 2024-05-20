@@ -3,6 +3,7 @@ import Sidebar from "../components/Sidebar";
 import "./style.css";
 import { SidebarContext } from "../components/Sidebarprovider";
 import { useNavigate } from "react-router-dom";
+import schema3 from "../assets/schema3.png";
 
 function Visu3() {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ function Visu3() {
             <h1 className="title">Visualisation des serveurs</h1>
           </div>
           <div className="schema">
-            <img src="../src/assets/schema3.png"/>
+            <img src={schema3}/>
           </div>
           <div className="positionLegende2">
             <div className="legende">

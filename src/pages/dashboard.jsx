@@ -27,25 +27,6 @@ function Tableau() {
   const [showCandidats, setshowCandidats] = useState(false);
   const [userEmpreinte, setUserEmpreinte] = useState("");
   const { user } = useContext(UserContext);
-  
-  //const membres = [
-  //  { nom: "Théo FRATCZAK", role: "Détenteur d’un fragment de clé" },
-  //  { nom: "Clémence DUMOULIN", role: "Détenteur d’un fragment de clé" },
-  //  { nom: "Alexandre MIHET", role: "Détenteur d’un fragment de clé" },
-  //  { nom: "Théo FRATCZAK", role: "Détenteur d’un fragment de clé" },
-  //  { nom: "Clémence DUMOULIN", role: "Détenteur d’un fragment de clé" },
-  //  { nom: "Alexandre MIHET", role: "Détenteur d’un fragment de clé" },
-  //  { nom: "Théo FRATCZAK", role: "Détenteur d’un fragment de clé" },
-  //  { nom: "Clémence DUMOULIN", role: "Détenteur d’un fragment de clé" },
-  //  { nom: "Alexandre MIHET", role: "Détenteur d’un fragment de clé" },
-  //  { nom: "Théo FRATCZAK", role: "Détenteur d’un fragment de clé" },
-  //  { nom: "Clémence DUMOULIN", role: "Détenteur d’un fragment de clé" },
-  //  { nom: "Alexandre MIHET", role: "Détenteur d’un fragment de clé" },
-  //  { nom: "Théo FRATCZAK", role: "Détenteur d’un fragment de clé" },
-  //  { nom: "Clémence DUMOULIN", role: "Détenteur d’un fragment de clé" },
-  //  { nom: "Alexandre MIHET", role: "Détenteur d’un fragment de clé" },
-  //  { nom: "Théo FRATCZAK", role: "Détenteur d’un fragment de clé" },
-  //];
 
   const [showRecepisse, setshowRecepisse] = useState(false);
   const [showMailEnvoye, setshowMailEnvoye] = useState(false);
@@ -569,8 +550,7 @@ function Tableau() {
               <ul className={`tableMembre ${listMembres}`}>
                 {listeCandidats.map((person, index) => (
                   <li key={index} className="border_bottom">
-                    <span className="nameCandidat">{person.name + " :"}</span>
-                    <span className="caracText">{person.characteristic}</span>
+                    <span className="nameCandidat">{"Candidat "+(index+1).toString()+": "+person.name}</span>
                   </li>
                 ))}
               </ul>
