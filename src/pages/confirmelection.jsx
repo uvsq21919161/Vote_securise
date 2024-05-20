@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import "./style.css";
 import { SidebarContext } from "../components/Sidebarprovider";
 import bulletin from "../assets/icon/bulletin.png";
@@ -6,8 +6,11 @@ import urne from "../assets/icon/Icon_vote.png";
 import { UserContext } from "../../context/usercontext";
 import axios from "axios";
 import { Navigate, useNavigate } from "react-router-dom";
+import bcrypt from "bcryptjs-react";
+import API from '../constants/Apis';
 
 function ConfirmElection() {
+  let firstDeploy = useRef(true);
   const navigate = useNavigate();
   const { selectCandidat, selectCandidatName } = useContext(UserContext);
   const [msgBulletin, setMsgBulletin] = useState(selectCandidatName);
@@ -20,6 +23,20 @@ function ConfirmElection() {
     marginLeft: isSideBarExpanded ? "275px" : "55px",
     transition: "margin-left 0.2s ease",
   };
+
+  console.log("ca c selectCandidat :", selectCandidat);
+  
+  useEffect(() => {
+    async function CalcEmpreinte() {
+      console.log('je me déploie');
+      const hash = bcrypt.hashSync(user.numero.toString(), 10);
+      setEmpreinte(hash);
+    }
+    if (firstDeploy.current) {
+      firstDeploy.current = false;
+      CalcEmpreinte();
+    }
+  }, []);
 
   const submitVote = async() => {
     //index du candidat selectionné
@@ -39,7 +56,6 @@ function ConfirmElection() {
     if (rec !== "Vote terminé ou vous avez déja voté...") {
       //let test = parseInt(user.numero);
       //console.log(typeof user.numero, user.numero);
-      const hash = bcrypt.hashSync(user.numero.toString(), 10);
       let lastone = await fetch(`${API.APIuri}/api/user/updateRecepisse`, {
         method: 'PUT',
         headers: {
@@ -47,7 +63,7 @@ function ConfirmElection() {
         },
         body: JSON.stringify({
           email: user.email,
-          recepisse: hash
+          recepisse: empreinte
         })
       });
       let resultat = await lastone.json();
@@ -60,7 +76,7 @@ function ConfirmElection() {
         },
         body: JSON.stringify({
           email: user.email,
-          recepisse: hash
+          recepisse: empreinte
         })
       });
       const mailres = await mail.json();
@@ -72,7 +88,7 @@ function ConfirmElection() {
               'Content-Type': 'application/json' 
           },
           body: JSON.stringify({
-            empreinte: hash,
+            empreinte: empreinte,
             vote: rec.votes[i],
             candidat: i
           })
@@ -87,6 +103,7 @@ function ConfirmElection() {
       console.log("Vous avez soit déja voté, soit le vote est terminé, soit il y a eu une erreur pendant le processus de chiffrement de votre vote.")
     }
   };
+  //$2a$10$M.WT9e3aBxX8YEJ3RL1s8eOnwiyiq5YZaPaVo/i38ltC2JFnjWtG2
 
   return (
     <React.Fragment>
@@ -100,7 +117,7 @@ function ConfirmElection() {
                 <br />
                 S’il représente bien ce que vous souhaitez voter, cliquez sur le
                 bouton
-                <strong>Envoyer définitivement votre bulletin</strong> pour que
+                <strong> Etape suivante</strong> pour que
                 votre bulletin soit envoyer dans l’urne.
                 <br />
                 S’il ne représente pas ce que vous souhaitez voter, vous pouvez
@@ -134,7 +151,6 @@ function ConfirmElection() {
                         Étape d’envoi définitif
                       </h2>
                     </div>
-                    <p className="bodybulletin">{msgBulletin}</p>
                     <button
                       className="button"
                       id="confirmButton"
@@ -154,7 +170,7 @@ function ConfirmElection() {
                     <p className="bodyConfirm" style={{paddingBottom: "0px", paddingTop: "0px"}}>
                     Cette empreinte pourra être utilisée pour suivre votre bulletin dans l’urne.
                     <br />
-                    Elle ne sera réaffiché qu’une seule fois apràs l’envoi de votre bulletin.
+                    Elle ne sera réaffiché qu’une seule fois après l’envoi de votre bulletin.
                     </p>
                   </div>
                 </div>

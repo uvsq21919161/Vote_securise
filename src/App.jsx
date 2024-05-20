@@ -38,6 +38,7 @@ function App() {
           <Route path="/organisateur" element={<Organisateur />} />
           <Route path="/loginAdmin" element={<LoginAdmin />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/confirmelection" element={<ConfirmElection />} />
         </Routes>
       </SidebarProvider>
       </UserContextProvider>

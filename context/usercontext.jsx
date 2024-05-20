@@ -14,7 +14,7 @@ export function UserContextProvider({ children }) {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [selectCandidat, setSelectCandidat] = useState(999);
-  const [selectCandidatName, setSelectCandidatName] = useState("Maya");
+  const [selectCandidatName, setSelectCandidatName] = useState("");
   useEffect(() => {
     if (!user) {
       navigate("/");
