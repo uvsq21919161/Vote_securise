@@ -393,37 +393,42 @@ function Tableau() {
             </button>
             <div className="contentRes">
               <div className="borderResultat">
-                <div className="pie-chart-container">
-                  <Pie data={data} options={options} />
-                </div>
+                {voteFini ? 
+                        <>
+                          <div className="pie-chart-container">
+                              <Pie data={data} options={options} />
+                            </div>
 
-                <div className="tableauRes">
-                  <table className="tableRes">
-                    <thead>
-                      <tr>
-                        <th>Nom du Candidat</th>
-                        <th>Nombre de Voix</th>
-                        <th>Pourcentage des Voix</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {candidats.map((candidat) => (
-                        <tr key={candidat.name}>
-                          <td>{candidat.name}</td>
-                          <td>{candidat.votes}</td>
-                          <td>
-                            {((candidat.votes / totalVotes) * 100).toFixed(2)}%
-                          </td>
-                        </tr>
-                      ))}
-                      <tr>
-                        <td>Total</td>
-                        <td>{totalVotes}</td>
-                        <td>100%</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+                            <div className="tableauRes">
+                              <table className="tableRes">
+                                <thead>
+                                  <tr>
+                                    <th>Nom du Candidat</th>
+                                    <th>Nombre de Voix</th>
+                                    <th>Pourcentage des Voix</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {candidats.map((candidat) => (
+                                    <tr key={candidat.name}>
+                                      <td>{candidat.name}</td>
+                                      <td>{candidat.votes}</td>
+                                      <td>
+                                        {((candidat.votes / totalVotes) * 100).toFixed(2)}%
+                                      </td>
+                                    </tr>
+                                  ))}
+                                  <tr>
+                                    <td>Total</td>
+                                    <td>{totalVotes}</td>
+                                    <td>100%</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </>
+                    : <p>Vous pourrez consulter les résultats quand le vote aura prit fin.</p>}
+
               </div>
             </div>
           </div>
