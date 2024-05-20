@@ -13,6 +13,8 @@ export const UserContext = createContext({});
 export function UserContextProvider({ children }) {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
+  const [selectCandidat, setSelectCandidat] = useState(999);
+  const [selectCandidatName, setSelectCandidatName] = useState("Maya");
   useEffect(() => {
     if (!user) {
       navigate("/");
@@ -20,7 +22,7 @@ export function UserContextProvider({ children }) {
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, setUser, selectCandidat, setSelectCandidat, selectCandidatName, setSelectCandidatName }}>
       {children}
     </UserContext.Provider>
   );

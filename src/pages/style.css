@@ -1,22 +1,22 @@
-.container{
+.container {
   display: flex;
   min-height: 100vh;
-  background-color: #BECDEA;
+  background-color: #becdea;
 }
 
 .page {
   width: 100%;
 }
 
-.title{
+.title {
   margin: 30px;
   font-size: 38px;
-  font-family: 'Inter';
+  font-family: "Inter";
 }
 
-.headinfo{
+.headinfo {
   margin: 30px;
-  font-family: 'Inter';
+  font-family: "Inter";
   font-size: 18px;
 }
 
@@ -26,7 +26,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Inter'
+  font-family: "Inter";
 }
 
 .flexcontainer {
@@ -50,14 +50,14 @@
   width: calc(100% - 30px);
   margin-left: 30px;
   margin-bottom: 25px;
-  border: 1px solid #809BCE;
+  border: 1px solid #809bce;
   border-radius: 20px;
 }
 
 .expand {
-  font-family: 'Inter';
+  font-family: "Inter";
   font-size: 1.3rem;
-  background-color: #A4B5D7;
+  background-color: #a4b5d7;
   padding: 40px 30px 40px 30px;
   border-radius: 0 0 20px 20px;
   display: flex;
@@ -69,11 +69,11 @@
   padding: 15px;
   width: 303px;
   align-self: flex-end;
-  background-color: #517AC1;
+  background-color: #517ac1;
   border: none;
   color: white;
   border-radius: 15px;
-  font-family: 'Inter';
+  font-family: "Inter";
   font-size: 1rem;
   text-align: center;
   display: flex;
@@ -89,7 +89,7 @@
 }
 
 #blue {
-  background-color: #000A3C;
+  background-color: #000a3c;
 }
 
 #white {
@@ -97,9 +97,9 @@
 }
 
 .candidat {
-  font-family: 'Inter';
+  font-family: "Inter";
   font-size: 1.3rem;
-  background-color: #A4B5D7;
+  background-color: #a4b5d7;
   padding: 40px 30px 40px 30px;
   border-radius: 20px;
   display: flex;
@@ -117,7 +117,7 @@
 }
 
 .bulletin {
-  background-color: #E7EEFA;
+  background-color: #e7eefa;
   padding: 30px;
   margin: 0 30px 0 30px;
   display: flex;
@@ -139,21 +139,21 @@
 }
 
 .headerbulletintext {
-  font-family: 'Inter';
+  font-family: "Inter";
   margin-bottom: 20px;
 }
 
 .bodybulletin {
   text-align: center;
-  font-family: 'Inter';
+  font-family: "Inter";
   margin-bottom: 20px;
   font-style: italic;
   font-weight: 300;
 }
 
 .button {
-  background-color: #517AC1;
-  font-family: 'Inter';
+  background-color: #517ac1;
+  font-family: "Inter";
   font-size: 1rem;
   text-align: center;
   color: #ffffff;
@@ -173,7 +173,6 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  
 }
 
 .buttonElement1 {
@@ -183,14 +182,14 @@
 }
 
 .buttonElement2 {
-  flex:1;
+  flex: 1;
   text-align: left;
   padding-left: 50px;
 }
 
 .button2 {
-  background-color: #517AC1;
-  font-family: 'Inter';
+  background-color: #517ac1;
+  font-family: "Inter";
   font-size: 1rem;
   text-align: center;
   color: #ffffff;
@@ -263,15 +262,55 @@
 }
 
 .legende {
-  background-color: #E7EEFA;
+  background-color: #e7eefa;
   padding: 30px;
   margin: 0 30px 0 30px;
   display: flex;
   flex-direction: column;
   border-radius: 30px;
   text-align: center;
-  font-family: 'Inter';
-  color: #000A3C;
+  font-family: "Inter";
+  color: #000a3c;
   font-size: 32px;
   font-weight: 700;
+}
+
+.containerbulletinConfirm {
+  flex: 3;
+}
+
+#confirm {
+  align-items: center;
+}
+
+#confirmButton {
+  width: 70%;
+}
+
+.voteIcon {
+  height: 30px;
+  width: 30px;
+}
+
+.bulletinIcon {
+  height: 25px;
+  width: 25px;
+}
+
+.bodyConfirm {
+  text-align: start;
+  align-self: flex-start;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.empreintText {
+  text-align: start;
+  align-self: flex-start;
+  padding: 10px;
+  width: 100%;
+  border: 1px solid #000A3C;
+  border-radius: 10px;
+  max-width: calc(100% - 20px);
+  margin-bottom: 20px;
 }

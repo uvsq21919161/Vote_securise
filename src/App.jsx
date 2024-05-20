@@ -14,6 +14,7 @@ import LoginAdmin from "./pages/loginAdmin";
 import Admin from "./pages/admin";
 import { UserContextProvider } from "../context/usercontext";
 import API from './constants/Apis';
+import ConfirmElection from "./pages/confirmelection";
 
 // const { Header, Sider } = Layout;
 axios.defaults.baseURL = API.APIuri;
@@ -23,19 +24,12 @@ axios.defaults.withCredentials = true;
 function App() {
   return (
     <>
-      {/* <Layout>
-        <Sider className='sidebar'>
-          <Logo />
-          <MenuList />
-        </Sider>
-      </Layout> */}
-      {/* <Login /> */}
       <UserContextProvider>
       <SidebarProvider>
         <Sidebar />
         <Routes>
           <Route path="/" element={<Login />} />
-          {/* <Route path="/login" element={<Login />} /> */}
+          <Route path="/confirm" element={<ConfirmElection />} />
           <Route path="/tableau" element={<Tableau />} />
           <Route path="/election" element={<Election />} /> 
           <Route path="/guide" element={<Guide />} />

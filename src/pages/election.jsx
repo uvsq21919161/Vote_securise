@@ -12,7 +12,6 @@ function Election() {
   const navigate = useNavigate();
   const [candidatsList, setCandidatsList] = useState([]);
   const [foldContent, setfoldContent] = useState(999);
-  const [selectCandidat, setSelectCandidat] = useState(999);
   const [msgBulletin, setMsgBulletin] = useState(
     "Vous n’avez pas encore fait votre choix, veuillez sélectionner une candidature."
   );
@@ -21,18 +20,14 @@ function Election() {
 
   const { selectedMenu, setSelectedMenu } = useContext(SidebarContext);
   const { user } = useContext(UserContext);
+  const { selectCandidat, setSelectCandidat } = useContext(UserContext);
+  const { setSelectCandidatName } = useContext(UserContext);
 
   const styleSidebarexpanded = {
     marginLeft: isSideBarExpanded ? "275px" : "55px",
     transition: "margin-left 0.2s ease",
   };
   const getCandidats = () => {
-    //setCandidatsList([
-    //  "Charbel TOUMA",
-    //  "Maya SANTINI",
-    //  "Thanushan PIRABAKARAN",
-    //  "Thomas JOLY",
-    //]);
     axios.post("/getCandidats", {}).then(({ data }) => {
       if (data.error) {
         setErrorCode(data.error);
@@ -90,74 +85,75 @@ function Election() {
   
   const submitVote = async() => {
     // appeler le truc de chiffré je vous mets les variables utiles
-    
+    setSelectCandidatName(msgBulletin);
+    navigate("/confirmelection");
     // contient numéro étudiant (un int) et email: {numero: 21919161, email: 'email'}
     console.log(user)
 
     // index du candidat selectionné
-    console.log(selectCandidat);
-    let res = await fetch(`${API.APIuri}/api/chi/chiffre`, {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json' 
-      },
-      body: JSON.stringify({
-        message: selectCandidat,
-        email: user.email
-      })
-    });
-    let rec = await res.json();
-    console.log(rec);
-    if (rec !== "Vote terminé ou vous avez déja voté...") {
-      //let test = parseInt(user.numero);
-      //console.log(typeof user.numero, user.numero);
-      const hash = bcrypt.hashSync(user.numero.toString(), 10);
-      let lastone = await fetch(`${API.APIuri}/api/user/updateRecepisse`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json' 
-        },
-        body: JSON.stringify({
-          email: user.email,
-          recepisse: hash
-        })
-      });
-      let resultat = await lastone.json();
-      console.log("res du update recipisse :",resultat);
-      console.log("envoie du recepisse par mail...");
-      let mail = await fetch(`${API.APIuri}/api/user/sendMail`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json' 
-        },
-        body: JSON.stringify({
-          email: user.email,
-          recepisse: hash
-        })
-      });
-      const mailres = await mail.json();
-      console.log(mailres);
-      for (let i = 0; i < rec.votes.length; i++) {
-        let resvote = await fetch(`${API.APIuri}/api/vote/avoter`, {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json' 
-          },
-          body: JSON.stringify({
-            empreinte: hash,
-            vote: rec.votes[i],
-            candidat: i
-          })
-        });
-        let response = await resvote.json();
-        if (response !== "Vote enregistré avec succès!") {
-          console.log("Erreur pendant le chiffrement du vote pour le candidat :",i);
-        }
-      }
-      navigate("/tableau");
-    } else {
-      console.log("Vous avez soit déja voté, soit le vote est terminé, soit il y a eu une erreur pendant le processus de chiffrement de votre vote.")
-    }
+    // console.log(selectCandidat);
+    // let res = await fetch(`${API.APIuri}/api/chi/chiffre`, {
+    //   method: 'POST',
+    //   headers: {
+    //       'Content-Type': 'application/json' 
+    //   },
+    //   body: JSON.stringify({
+    //     message: selectCandidat,
+    //     email: user.email
+    //   })
+    // });
+    // let rec = await res.json();
+    // console.log(rec);
+    // if (rec !== "Vote terminé ou vous avez déja voté...") {
+    //   //let test = parseInt(user.numero);
+    //   //console.log(typeof user.numero, user.numero);
+    //   const hash = bcrypt.hashSync(user.numero.toString(), 10);
+    //   let lastone = await fetch(`${API.APIuri}/api/user/updateRecepisse`, {
+    //     method: 'PUT',
+    //     headers: {
+    //         'Content-Type': 'application/json' 
+    //     },
+    //     body: JSON.stringify({
+    //       email: user.email,
+    //       recepisse: hash
+    //     })
+    //   });
+    //   let resultat = await lastone.json();
+    //   console.log("res du update recipisse :",resultat);
+    //   console.log("envoie du recepisse par mail...");
+    //   let mail = await fetch(`${API.APIuri}/api/user/sendMail`, {
+    //     method: 'POST',
+    //     headers: {
+    //         'Content-Type': 'application/json' 
+    //     },
+    //     body: JSON.stringify({
+    //       email: user.email,
+    //       recepisse: hash
+    //     })
+    //   });
+    //   const mailres = await mail.json();
+    //   console.log(mailres);
+    //   for (let i = 0; i < rec.votes.length; i++) {
+    //     let resvote = await fetch(`${API.APIuri}/api/vote/avoter`, {
+    //       method: 'POST',
+    //       headers: {
+    //           'Content-Type': 'application/json' 
+    //       },
+    //       body: JSON.stringify({
+    //         empreinte: hash,
+    //         vote: rec.votes[i],
+    //         candidat: i
+    //       })
+    //     });
+    //     let response = await resvote.json();
+    //     if (response !== "Vote enregistré avec succès!") {
+    //       console.log("Erreur pendant le chiffrement du vote pour le candidat :",i);
+    //     }
+    //   }
+    //   navigate("/tableau");
+    // } else {
+    //   console.log("Vous avez soit déja voté, soit le vote est terminé, soit il y a eu une erreur pendant le processus de chiffrement de votre vote.")
+    // }
   };
   
   return (
