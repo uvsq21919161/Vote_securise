@@ -23,6 +23,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/", require("./server/routes/authRoutes"));
 
 // Définit le chemin pour retrouver les modules du serveur
+app.use('/api/user', require('./server/routes/UserRoute'));
 app.use('/api/orga', require('./server/routes/OrganisateurRoute'));
 app.use('/api/combine', require('./server/routes/CombineRoute'));
 app.use('/api/candidat', require('./server/routes/CandidatRoute'));

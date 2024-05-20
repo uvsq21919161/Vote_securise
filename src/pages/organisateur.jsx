@@ -36,12 +36,17 @@ function Organisateur() {
 
     const [prenom, setPrenom] = React.useState("");
 
+    const [userMail, setUserMail] = React.useState("");
+
+    const [userNum, setUserNum] = React.useState("");
+
     const styleSidebarexpanded = {
         marginLeft: isSideBarExpanded ? "275px" : "55px",
         transition: "margin-left 0.2s ease",
       };
 
     const handleInit = async() => {
+        console.log("Initialisation du vote...")
         let res = await fetch(`${API.APIuri}/api/init/init`, {
             method: 'POST',
             headers: {
@@ -53,6 +58,8 @@ function Organisateur() {
               date_fin: new Date(annee, mois-1, jour, heure, 0,0)
             })
           });
+        const resultat = await res.json();
+        console.log(resultat);
     };
 
     const handleAddCand = async() => {
@@ -66,6 +73,8 @@ function Organisateur() {
               description: descriptionCand
             })
           });
+        const resultat = await res.json();
+        console.log(resultat);
     }
 
     const handleAddAdmin = async() => {
@@ -101,7 +110,10 @@ function Organisateur() {
                   candidat: i
                 })
               });
-        } 
+            let resReadable = await res.json();
+            console.log(resReadable);
+        };
+
     };
 
     const calcFinalResults = async() => {
@@ -147,6 +159,21 @@ function Organisateur() {
                 })
               });
         }
+    };
+
+    const addUser = async() => {
+        let res = await fetch(`${API.APIuri}/api/user/add`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json' 
+            },
+            body: JSON.stringify({
+              mail: userMail,
+              numero: userNum
+            })
+          });
+        let readable = await res.json();
+        console.log(readable);
     }
 
     return (
@@ -212,6 +239,18 @@ function Organisateur() {
                     </div>
                     <div>
                         <Button onClick={() => {calcFinalResults()}} style={{marginBottom:"100px"}}>Calculer les résultats du vote</Button>
+                    </div>
+                    <div>
+                        Ajouter un utilisateur au vote :
+                    </div>
+                    <div>
+                        <input placeholder="Mail de l'utilisateur" onChange={e => {setUserMail(e.target.value)}}></input>
+                    </div>
+                    <div>
+                        <input placeholder="Numero de l'utilisateur" onChange={e => {setUserNum(e.target.value)}}></input>
+                    </div>
+                    <div>
+                        <Button onClick={() => {addUser()}} style={{marginBottom:"100px"}}>Ajouter l'utilisateur</Button>
                     </div>
                 </div>
             </div>

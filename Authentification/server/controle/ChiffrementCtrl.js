@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 
 const PublicKey = require('../modeles/PubkeyModel');
 const Vote = require ('../modeles/VotesModel');
+const User = require('../modeles/user');
 
 const chiffreContr = {};
 
@@ -15,11 +16,11 @@ chiffreContr.chiffre = async(req,res) => {
   //on doit aussi récup le message que le boug veut chiffrer mais on le récup dans les args
   //de la requête pas sur la bdd
 
-  const {message, uid} = req.body;
+  const {message, email} = req.body;
 
-  const verif = await Vote.find({"uid":uid});
+  const empreinte = await User.find({"email":email});
 
-  if (verif.length > 0) {
+  if (empreinte[0].recepisse !== "0") {
     res.json("Vote terminé ou vous avez déja voté...");
     return;
   }
@@ -33,8 +34,9 @@ chiffreContr.chiffre = async(req,res) => {
   const n = pub[0].n;
 
   const d = new Date();
-
-  if (d.getTime() > pub[0].date_fin) {
+  const fin = new Date(pub[0].date_fin);
+  if (fin < d.getTime()) {
+    console.log("vote terminé");
     res.json("Vote terminé ou vous avez déja voté...");
     return;
   }

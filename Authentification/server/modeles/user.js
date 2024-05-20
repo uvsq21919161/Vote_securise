@@ -18,6 +18,7 @@ const userSchema = new Schema({
     unique: true,
   },
   code: Number,
+  recepisse: String
 });
 
 // Connexion de mongoose, une API de mongoDB, au modèle

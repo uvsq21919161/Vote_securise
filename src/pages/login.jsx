@@ -1,10 +1,11 @@
 import "./login.css";
-import { useState, navigate, useContext } from "react";
+import { useState, navigate, useContext, useEffect } from "react";
 import axios from "axios";
 import boxlogo from "../assets/boxlogo.png";
 import logo from "../assets/Comott.png";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/usercontext";
+import API from '../constants/Apis';
 
 function Login() {
   const navigate = useNavigate();
@@ -12,6 +13,12 @@ function Login() {
   const [errorNumEtu, setErrorNumEtu] = useState("");
   const [code, setCode] = useState("");
   const [errorCode, setErrorCode] = useState("");
+  const [jour, setJour] = useState("");
+  const [mois, setMois] = useState("");
+  const [heure, setHeure] = useState("");
+  const [minute, setMinute] = useState("");
+  const [anne, setAnne] = useState("");
+  const [voteFini, setVoteFini] = useState(false);
   const { setUser } = useContext(UserContext);
 
   const handleChange = (e) => {
@@ -60,6 +67,44 @@ function Login() {
   const adminLogin = () => {
     navigate("/loginAdmin")
   }
+
+  useEffect(() => {
+    async function fetchEndTime() {
+      const pubkey = await fetch(`${API.APIuri}/api/init/get`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json' 
+        }
+      });
+      const readable = await pubkey.json();
+      const d = new Date();
+      const fin = new Date(readable.date_fin);
+      setVoteFini(fin < d.getTime());
+      let arg1 = fin.getDate();
+      if (arg1 < 10) {
+        arg1 = "0"+arg1.toString();
+      }
+      setJour(arg1);
+      let arg2 = fin.getMonth()+1;
+      if (arg2 < 10) {
+        arg2 = "0"+arg2.toString();
+      }
+      setMois(arg2);
+      setAnne(fin.getFullYear());
+      let arg3 = fin.getHours();
+      if (arg3 < 10) {
+        arg3 = "0"+arg3.toString();
+      }
+      setHeure(arg3);
+      let arg = fin.getMinutes();
+      if (arg < 10) {
+        arg = "0"+arg.toString();
+      }
+      setMinute(arg);
+      
+    };
+    fetchEndTime();
+  }, [])
 
   return (
     <>
@@ -141,8 +186,8 @@ function Login() {
           </p>
           <p className="info big">
             <b>
-              Le vote électronique est ouvert du lundi 13/05/24 8:00 au vendredi
-              24/05/24 17:00 mai (heures de Paris).
+              {voteFini ? <p>Le vote électronique est fermé. Connectez vous pour visualiser les résultats.</p>
+              : <p>Le vote électronique est ouvert jusqu'a {heure}:{minute} le {jour}/{mois}/{anne}</p>}
             </b>
           </p>
           <p className="nav" style={{marginTop:"120px"}} onClick={organisateurLogin}>Accès organisateur</p>

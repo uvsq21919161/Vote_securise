@@ -6,8 +6,9 @@ const PublicKey = require('../modeles/PubkeyModel');
 const AdminMail = require('../modeles/AdminModel');
 const Ci = require("../modeles/CiModel");
 const Candidat = require('../modeles/Candidats');
-const Vote = require ('../modeles/VotesModel');
-const ProduitVotes = require ('../modeles/ProduitVoteModel');
+const Vote = require('../modeles/VotesModel');
+const ProduitVotes = require('../modeles/ProduitVoteModel');
+const User = require('../modeles/user');
 
 const initVoteCtrl = {};
 
@@ -35,18 +36,23 @@ initVoteCtrl.init = async(req,res) => {
   const {nb_serv, candidats, date_fin} = req.body; 
 
   const allMails = await AdminMail.find();
-  console.log(allMails);
 
   if (nb_serv > allMails.length) {
     res.json("Pas assez de mails admin dans la base de donnée...");
     return;
   }
 
-  await PublicKey.deleteMany({})
-  await Ci.deleteMany({})
-  await Candidat.deleteMany({})
-  await Vote.deleteMany({})
-  await ProduitVotes.deleteMany({})
+  await PublicKey.deleteMany({});
+  await Ci.deleteMany({});
+  await Candidat.deleteMany({});
+  await Vote.deleteMany({});
+  await ProduitVotes.deleteMany({});
+
+  const allUsers = await User.find();
+
+  for (let i = 0; i < allUsers.length; i++) {
+    await User.findOneAndUpdate({email: allUsers[i].email}, { $set: { recepisse: "0" } });
+  };
 
   const py = spawn("python", ['server/scripts_python/backendInit.py',nb_serv.toString(),candidats.toString()]);
 

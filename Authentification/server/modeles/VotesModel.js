@@ -2,8 +2,8 @@ const { Schema, model } = require('mongoose');
 
 const votesSchema = new Schema({
   _id: Schema.Types.ObjectId,
-  uid: {
-    type: Number,
+  empreinte: {
+    type: String,
     required: true
   },
   vote: {

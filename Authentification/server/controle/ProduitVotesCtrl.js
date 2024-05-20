@@ -14,6 +14,13 @@ produitVotesCtrl.calc = async(req, res) => {
 
     const pub = await PublicKey.find();
 
+    const d = new Date();
+    const fin = new Date(pub[0].date_fin);
+
+    if (fin > d.getTime()) {
+      await PublicKey.findOneAndUpdate({_id: pub[0]._id}, { $set: { date_fin: d.getTime() } })
+    }
+
     let args = [];
 
     args.push('server/scripts_python/homomorphe.py')
@@ -42,6 +49,7 @@ produitVotesCtrl.calc = async(req, res) => {
       resolve(output);
     });
   });
+
 
   const _id = new mongoose.Types.ObjectId;
   

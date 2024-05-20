@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import "./App.css";
 import { Pie } from "react-chartjs-2";
 import Chart from "chart.js/auto";
@@ -11,77 +11,97 @@ import vote from "../assets/icon/Icon_vote.png";
 import bulletin from "../assets/icon/bulletin.png";
 import bulletin2 from "../assets/icon/bulletin2.png";
 import deco from "../assets/icon/deco.png";
+import API from '../constants/Apis';
+import { UserContext } from "../../context/usercontext";
 
 function Tableau() {
+  let firstDeploy = useRef(true);
   const [showRes, setRes] = useState(false);
-  const [showNotif1, setshowNotif1] = useState(true);
-  const [showNotif2, setshowNotif2] = useState(true);
+  const [showNotif1, setshowNotif1] = useState(false);
+  const [showNotif2, setshowNotif2] = useState(false);
+  const [showNotif3, setshowNotif3] = useState(false);
   const [showUrne, setshowUrne] = useState(false);
   const [empreinte, setEmpreinte] = useState("");
   const [showResEmpreinte, setResEmpreinte] = useState(false);
   const [showMembreBureau, setshowMembreBureau] = useState(false);
   const [showCandidats, setshowCandidats] = useState(false);
-  const listeCandidats = [
-    { name: "Charbel TOUMA", characteristic: "l’aigri" },
-    { name: "Maya SANTINI ", characteristic: "l’adorable" },
-    { name: "Thanushan PIRABAKARAN", characteristic: "le diablotin " },
-    { name: "Thomas JOLY", characteristic: "il est là " },
-    { name: "Personne 1", characteristic: "Caractéristique " },
-    { name: "Personne 2", characteristic: "Caractéristique " },
-    { name: "Personne 3", characteristic: "Caractéristique " },
-    { name: "Personne 4", characteristic: "Caractéristique " },
-    { name: "Personne 5", characteristic: "Caractéristique " },
-    { name: "Personne 6", characteristic: "Caractéristique " },
-    { name: "Personne 7", characteristic: "Caractéristique " },
-    { name: "Personne 8", characteristic: "Caractéristique " },
-    { name: "Personne 9", characteristic: "Caractéristique " },
-    { name: "Personne 10", characteristic: "Caractéristique " },
-  ];
-  const membres = [
-    { nom: "Théo FRATCZAK", role: "Détenteur d’un fragment de clé" },
-    { nom: "Clémence DUMOULIN", role: "Détenteur d’un fragment de clé" },
-    { nom: "Alexandre MIHET", role: "Détenteur d’un fragment de clé" },
-    { nom: "Théo FRATCZAK", role: "Détenteur d’un fragment de clé" },
-    { nom: "Clémence DUMOULIN", role: "Détenteur d’un fragment de clé" },
-    { nom: "Alexandre MIHET", role: "Détenteur d’un fragment de clé" },
-    { nom: "Théo FRATCZAK", role: "Détenteur d’un fragment de clé" },
-    { nom: "Clémence DUMOULIN", role: "Détenteur d’un fragment de clé" },
-    { nom: "Alexandre MIHET", role: "Détenteur d’un fragment de clé" },
-    { nom: "Théo FRATCZAK", role: "Détenteur d’un fragment de clé" },
-    { nom: "Clémence DUMOULIN", role: "Détenteur d’un fragment de clé" },
-    { nom: "Alexandre MIHET", role: "Détenteur d’un fragment de clé" },
-    { nom: "Théo FRATCZAK", role: "Détenteur d’un fragment de clé" },
-    { nom: "Clémence DUMOULIN", role: "Détenteur d’un fragment de clé" },
-    { nom: "Alexandre MIHET", role: "Détenteur d’un fragment de clé" },
-    { nom: "Théo FRATCZAK", role: "Détenteur d’un fragment de clé" },
-  ];
-  const listClass = membres.length > 9 ? "long-list" : ""; // Pour mettre une ligne de separation au dernier element d'une petite liste
-  const listMembres = listeCandidats.length > 9 ? "long-list" : ""; // Pour mettre une ligne de separation au dernier element d'une petite liste
+  const [userEmpreinte, setUserEmpreinte] = useState("");
+  const { user } = useContext(UserContext);
+  
+  //const membres = [
+  //  { nom: "Théo FRATCZAK", role: "Détenteur d’un fragment de clé" },
+  //  { nom: "Clémence DUMOULIN", role: "Détenteur d’un fragment de clé" },
+  //  { nom: "Alexandre MIHET", role: "Détenteur d’un fragment de clé" },
+  //  { nom: "Théo FRATCZAK", role: "Détenteur d’un fragment de clé" },
+  //  { nom: "Clémence DUMOULIN", role: "Détenteur d’un fragment de clé" },
+  //  { nom: "Alexandre MIHET", role: "Détenteur d’un fragment de clé" },
+  //  { nom: "Théo FRATCZAK", role: "Détenteur d’un fragment de clé" },
+  //  { nom: "Clémence DUMOULIN", role: "Détenteur d’un fragment de clé" },
+  //  { nom: "Alexandre MIHET", role: "Détenteur d’un fragment de clé" },
+  //  { nom: "Théo FRATCZAK", role: "Détenteur d’un fragment de clé" },
+  //  { nom: "Clémence DUMOULIN", role: "Détenteur d’un fragment de clé" },
+  //  { nom: "Alexandre MIHET", role: "Détenteur d’un fragment de clé" },
+  //  { nom: "Théo FRATCZAK", role: "Détenteur d’un fragment de clé" },
+  //  { nom: "Clémence DUMOULIN", role: "Détenteur d’un fragment de clé" },
+  //  { nom: "Alexandre MIHET", role: "Détenteur d’un fragment de clé" },
+  //  { nom: "Théo FRATCZAK", role: "Détenteur d’un fragment de clé" },
+  //];
 
   const [showRecepisse, setshowRecepisse] = useState(false);
   const [showMailEnvoye, setshowMailEnvoye] = useState(false);
   const [candidats, setCandidats] = useState([]);
-  //const candidats = [
-  //  { name: "Vote blanc", votes: 100 },
-  //  { name: "Charbel TOUMA", votes: 150 },
-  //  { name: "Maya SANTINI", votes: 70 },
-  //  { name: "Thomas JOLY", votes: 10 },
-  //  { name: "Thanushan PIRABAKARAN", votes: 50 },
-  //];
+  const [listeCandidats, setListeCandidats] = useState([]);
+  const [membres, setMembres] = useState([]);
+  const [jour, setJour] = useState("");
+  const [mois, setMois] = useState("");
+  const [heure, setHeure] = useState("");
+  const [minute, setMinute] = useState("");
+  const [anne, setAnne] = useState("");
+  const [voteFini, setVoteFini] = useState(false);
+  const [empreinteFound, setEmpreinteFound] = useState(false);
 
-  //useEffect(async() => {
-  //  const cands = await fetch(`${API.APIuri}/api/candidat/getall`, {
-  //    method: 'GET',
-  //    headers: {
-  //      'Content-Type': 'application/json' 
-  //    }
-  //  });
-  //  const allCands = await cands.json();
-  //  const candidats = [];
-  //  for (let i = 0; i < allCands.length; i++) {
-  //    candidats.push({name: allCands[i].nom, votes: allCands[i].resultat})
-  //  }
-  //}, []);
+  const listClass = membres.length > 9 ? "long-list" : ""; // Pour mettre une ligne de separation au dernier element d'une petite liste
+  const listMembres = listeCandidats.length > 9 ? "long-list" : ""; // Pour mettre une ligne de separation au dernier element d'une petite liste
+
+  useEffect(() => {
+    async function fetchCandidatsAndMembers() {
+      const cands = await fetch(`${API.APIuri}/api/candidat/getall`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json' 
+        }
+      });
+      const allCands = await cands.json();
+      let sumVotes = 0;
+      for (let i = 0; i < allCands.length; i++) {
+        sumVotes = sumVotes + allCands[i].resultat;
+        setCandidats(prevItems => [...prevItems, {name: allCands[i].nom, votes: allCands[i].resultat}]);
+        setListeCandidats(prevItems => [...prevItems, {name: allCands[i].nom, characteristic: allCands[i].description}])
+      };
+      const nbVotes = await fetch(`${API.APIuri}/api/vote/numberOfVotes`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json' 
+        }
+      });
+      const nbVotesRes = await nbVotes.json();
+      setCandidats(prevItems => [...prevItems, {name: "Votes blanc", votes: (nbVotesRes/allCands.length)-sumVotes}]);
+      const membres = await fetch(`${API.APIuri}/api/admin/getall`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json' 
+        }
+      });
+      const allAdmins = await membres.json();
+      for (let i = 0; i < allAdmins.length; i++) {
+        setMembres(prevItems => [...prevItems, {nom:allAdmins[i].prenom+" "+allAdmins[i].nom, role: "Détenteur d’un fragment de clé"}])
+      };
+    };
+    if (firstDeploy.current) {
+      firstDeploy.current = false;
+      fetchCandidatsAndMembers();
+    }
+  }, []);
 
   const [FinVote, setFinVote] = useState(false);
   const { isSideBarExpanded, setIsSideBarExpanded } =
@@ -155,18 +175,105 @@ function Tableau() {
     },
   };
   
-  const handleButtonClick = (buttonId) => {
+  const handleButtonClick = async(buttonId) => {
     //rajouter qu'il faut verifier que l'empreinte est bien dans l'urne
 
     if (buttonId === "VerifierEmpreinte") {
       setResEmpreinte(true);
-      console.log("empreinte recupérée");
       console.log(empreinte);
+      let res = await fetch(`${API.APIuri}/api/vote/findByEmpreinte`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json' 
+        },
+        body: JSON.stringify({
+          empreinte: empreinte
+        })
+      });
+      const resultat = await res.json();
+      if (resultat === "Empreinte non valide.") {
+        setEmpreinteFound(false);
+      } else {
+        setEmpreinteFound(true);
+      }
     } else if (buttonId === "EnvoyerMail") {
       setshowMailEnvoye(true);
-      console.log("Mail envoyé");
+      if (userEmpreinte !== "0") {
+        let res = await fetch(`${API.APIuri}/api/user/sendMail`, {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json' 
+          },
+          body: JSON.stringify({
+            email: user.email,
+            recepisse: userEmpreinte
+          })
+        });
+        const readable = await res.json();
+        console.log(readable);
+      }
     }
   };
+
+  useEffect(() => {
+    async function fetchEndTime() {
+      const pubkey = await fetch(`${API.APIuri}/api/init/get`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json' 
+        }
+      });
+      const readable = await pubkey.json();
+      const d = new Date();
+      const fin = new Date(readable.date_fin);
+      setVoteFini(fin < d.getTime());
+      setshowNotif3(fin < d.getTime());
+      let arg1 = fin.getDate();
+      if (arg1 < 10) {
+        arg1 = "0"+arg1.toString();
+      }
+      setJour(arg1);
+      let arg2 = fin.getMonth()+1;
+      if (arg2 < 10) {
+        arg2 = "0"+arg2.toString();
+      }
+      setMois(arg2);
+      setAnne(fin.getFullYear());
+      let arg3 = fin.getHours();
+      if (arg3 < 10) {
+        arg3 = "0"+arg3.toString();
+      }
+      setHeure(arg3);
+      let arg = fin.getMinutes();
+      if (arg < 10) {
+        arg = "0"+arg.toString();
+      }
+      setMinute(arg);
+      
+    };
+    fetchEndTime();
+  }, []);
+
+  useEffect(() => {
+    async function fetchRecepisse() {
+      let res = await fetch(`${API.APIuri}/api/user/get`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json' 
+        },
+        body: JSON.stringify({
+          email: user.email
+        })
+      });
+      const resultat = await res.json();
+      if (resultat.recepisse !== 0) {
+        setshowNotif1(true);
+        setshowNotif2(true);
+      }
+      setUserEmpreinte(resultat.recepisse);
+    };
+    fetchRecepisse();
+  }, []);
 
   return (
     <div className="container">
@@ -189,7 +296,7 @@ function Tableau() {
                 Votre bulletin a bien été enregistré.
               </p>
               <p className="Texte2_rect1 limited-width">
-                Votre récépissé de vote a été envoyé à monadressemail@gmail.com.
+                Votre récépissé de vote a été envoyé à {user.email}.
               </p>
             </div>
           )}
@@ -200,8 +307,18 @@ function Tableau() {
                 Fermer
               </button>
               <p className="Texte limited-width">
-                Vous n’avez plus de vote à exprimer, vous pouvez vous
-                déconnecter.
+                Vous n’avez plus de vote à exprimer.
+              </p>
+            </div>
+          )}
+
+          {showNotif3 && (
+            <div className="notification Rect3">
+              <button class="FermerRes" onClick={() => setshowNotif3(false)}>
+                Fermer
+              </button>
+              <p className="Texte limited-width">
+                Le vote est terminé, vous pouvez dès maintenant consulter les résultats.
               </p>
             </div>
           )}
@@ -210,7 +327,8 @@ function Tableau() {
             <p className="TexteBigRect">Élection du représentant du groupe</p>
             <p className="TexteTourUnique">Tour unique</p>
             <p className="TexteDate">
-              13 mai 2024, 08:00 {">"} 24 mai 2024, 17:00
+              {voteFini ? <p>Le vote est terminé.</p>
+              : <p>Le vote se termine a {heure}:{minute} le {jour}/{mois}/{anne}.</p>}
             </p>
             <div class="line"></div>
             <div className="Features">
@@ -376,14 +494,13 @@ function Tableau() {
               </button>
               {showResEmpreinte && (
                 <div className="popupEmpreinte">
-                  <p className="TexteEmpreinte">
-                    Élection du représentant du groupe - Tour unique :
-                    <br />
+                  {empreinteFound ? <p className="TexteEmpreinte">
                     Cette empreinte correspond à une entrée dans la liste
-                    d’émargement (et non pas à une empreinte de bulletin), le
-                    vote de PIRABAKARAN Thanushan a bien été enregistré le
-                    12/03/2024 à 10h32.
+                    d’émargement (et non pas à une empreinte de bulletin), 
+                    votre vote a bien été enregistré.
                   </p>
+                  : <p> L'empreinte que vous avez founie n'est pas valide et ne 
+                    correspond à aucun vote dans la base de donnée.</p>}
                 </div>
               )}
             </div>
@@ -479,7 +596,8 @@ function Tableau() {
               </div>
               <div className="inputContainer">
                 <label htmlFor="Empreinte">Empreinte</label>
-                <p id="Empreinte">{empreinte}</p>
+                {userEmpreinte=="0" ? <p id="Empreinte">Vous n'avez pas voté.</p>
+                : <p id="Empreinte" style={{fontSize:"8px"}}>{userEmpreinte}</p>}
               </div>
               <button
                 class="bouttonVerifier"
@@ -491,9 +609,9 @@ function Tableau() {
               </button>
               {showMailEnvoye && (
                 <div className="popupEmpreinte">
-                  <p className="TexteEmpreinte">
+                  {userEmpreinte!=="0" && <p className="TexteEmpreinte">
                     Votre récépissé de vote a été envoyé à votre adresse mail.
-                  </p>
+                  </p>}
                 </div>
               )}
             </div>

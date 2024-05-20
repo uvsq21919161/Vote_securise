@@ -5,8 +5,11 @@ import unfold from "../assets/icon/unfold.png";
 import { UserContext } from "../../context/usercontext";
 import axios from "axios";
 import API from '../constants/Apis';
+import bcrypt from "bcryptjs-react";
+import { useNavigate } from "react-router-dom";
 
 function Election() {
+  const navigate = useNavigate();
   const [candidatsList, setCandidatsList] = useState([]);
   const [foldContent, setfoldContent] = useState(999);
   const [selectCandidat, setSelectCandidat] = useState(999);
@@ -70,7 +73,7 @@ function Election() {
     // appeler le truc de chiffré je vous mets les variables utiles
     
     // contient numéro étudiant (un int) et email: {numero: 21919161, email: 'email'}
-    console.log(user.numero)
+    console.log(user)
 
     // index du candidat selectionné
     console.log(selectCandidat);
@@ -81,12 +84,40 @@ function Election() {
       },
       body: JSON.stringify({
         message: selectCandidat,
-        uid: user.numero
+        email: user.email
       })
     });
     let rec = await res.json();
     console.log(rec);
     if (rec !== "Vote terminé ou vous avez déja voté...") {
+      //let test = parseInt(user.numero);
+      //console.log(typeof user.numero, user.numero);
+      const hash = bcrypt.hashSync(user.numero.toString(), 10);
+      let lastone = await fetch(`${API.APIuri}/api/user/updateRecepisse`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json' 
+        },
+        body: JSON.stringify({
+          email: user.email,
+          recepisse: hash
+        })
+      });
+      let resultat = await lastone.json();
+      console.log("res du update recipisse :",resultat);
+      console.log("envoie du recepisse par mail...");
+      let mail = await fetch(`${API.APIuri}/api/user/sendMail`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json' 
+        },
+        body: JSON.stringify({
+          email: user.email,
+          recepisse: hash
+        })
+      });
+      const mailres = await mail.json();
+      console.log(mailres);
       for (let i = 0; i < rec.votes.length; i++) {
         let resvote = await fetch(`${API.APIuri}/api/vote/avoter`, {
           method: 'POST',
@@ -94,7 +125,7 @@ function Election() {
               'Content-Type': 'application/json' 
           },
           body: JSON.stringify({
-            uid: user.numero,
+            empreinte: hash,
             vote: rec.votes[i],
             candidat: i
           })
@@ -104,6 +135,7 @@ function Election() {
           console.log("Erreur pendant le chiffrement du vote pour le candidat :",i);
         }
       }
+      navigate("/tableau");
     } else {
       console.log("Vous avez soit déja voté, soit le vote est terminé, soit il y a eu une erreur pendant le processus de chiffrement de votre vote.")
     }
