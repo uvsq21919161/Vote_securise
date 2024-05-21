@@ -8,6 +8,7 @@ import img_resultats from "../assets/guide/imgResultats.png";
 import img_bureau from "../assets/guide/imgBureau.png";
 import img_listecandidats from "../assets/guide/imgListeCandidats.png";
 import img_validation from "../assets/guide/imgValidation.png";
+import img_recepisse from "../assets/guide/imgRecepisse.png";
 import { SidebarContext } from "../components/Sidebarprovider";
 
 function Guide() {
@@ -526,6 +527,11 @@ function Guide() {
                 <br />
               </p>
               <div className="imgRecepisse"></div>
+              <div className="flexcontainer" id="guide_flex">
+                <div className="imgContainer Recepisse">
+                  <img className="imageRecepisse" src={img_recepisse}></img>
+                </div>
+              </div>
             </div>
             <div className="chaptitre" ref={targetchap4}>
               <p>IV - Visualisation des serveurs</p>

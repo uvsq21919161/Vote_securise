@@ -35,7 +35,7 @@ function Visu8() {
           </div>
           <div className="positionLegende7">
             <div className="legende">
-            Le serveur central calcul le résultat final avec un aglorithme combine.
+            Le serveur central calcul le résultat final avec un algorithme combine.
             </div>
           </div>
           <div className="buttonContainer">

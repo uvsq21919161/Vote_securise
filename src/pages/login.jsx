@@ -3,6 +3,7 @@ import { useState, navigate, useContext, useEffect } from "react";
 import axios from "axios";
 import boxlogo from "../assets/boxlogo.png";
 import logo from "../assets/Comott.png";
+import illustration from "../assets/login_right.png"
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/usercontext";
 import API from '../constants/Apis';
@@ -179,7 +180,7 @@ function Login() {
           </h1>
           <img
             className="image_illustration"
-            src="src/assets/login_right.png"
+            src={illustration}
           />
           <p className="info little">
             Bienvenue sur la plateforme de vote du représentant de votre groupe.

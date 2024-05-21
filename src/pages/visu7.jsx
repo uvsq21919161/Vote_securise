@@ -35,7 +35,7 @@ function Visu7() {
           </div>
           <div className="positionLegende6">
             <div className="legende">
-            Chaque serveur envoie ses résultats, accompagné d’une clé de vérification au serveur central.
+            Chaque serveur envoie ses résultats au serveur central.
             </div>
           </div>
           <div className="buttonContainer">
