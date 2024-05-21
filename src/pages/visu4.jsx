@@ -35,7 +35,7 @@ function Visu4() {
           </div>
           <div className="positionLegende3">
             <div className="legende">
-            Le serveur central applique des propriétés homomorphiques pour obtenir un chiffré par candidat. On aura donc n chiffrés pour n candidats.
+            Le serveur central applique des propriétés homomorphes pour obtenir un chiffré par candidat. On aura donc n chiffrés pour n candidats.
             </div>
           </div>
           <div className="buttonContainer">
