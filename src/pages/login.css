@@ -166,7 +166,7 @@ p {
   align-self: flex-end;
   color: #98b3e1;
   padding-bottom: 50px;
-  display: grid;
+  display: none;
   justify-items: center;
 }
 
