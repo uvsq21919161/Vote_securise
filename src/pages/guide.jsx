@@ -526,7 +526,6 @@ function Guide() {
                 <br />
                 <br />
               </p>
-              <div className="imgRecepisse"></div>
               <div className="flexcontainer" id="guide_flex">
                 <div className="imgContainer Recepisse">
                   <img className="imageRecepisse" src={img_recepisse}></img>
